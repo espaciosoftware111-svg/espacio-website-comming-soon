@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- SEO & Metadata -->
+    <title>ESPACIO Interiors & Modulars | Designing Spaces, Defining Lifestyles</title>
+    <meta name="description" content="ESPACIO Interiors & Modulars - Luxury residential interiors, precision modular kitchens, and bespoke architectural spaces. 40+ Years Legacy in Hyderabad. Aziznagar Experience Studio." />
+    <meta name="keywords" content="Espacio Interiors, Luxury Interior Designers Hyderabad, Modular Kitchens Hyderabad, Aziznagar Interior Studio, Turnkey Interiors, Hyderabad Architecture" />
+    <meta name="theme-color" content="#08090C" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="ESPACIO Interiors & Modulars — Designing Spaces, Defining Lifestyles" />
+    <meta property="og:description" content="Designing Spaces · Defining Lifestyles. Luxury interior architecture and flagship studio in Aziznagar, Hyderabad." />
+    <meta property="og:type" content="website" />
+
+    <!-- Favicon: Exact Image 2 Open Architectural Frame Logo with Gaps Around E -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%2308090C'/><line x1='14' y1='14' x2='42' y2='14' stroke='%23C5A572' stroke-width='3' stroke-linecap='round'/><line x1='54' y1='14' x2='86' y2='14' stroke='%23C5A572' stroke-width='3' stroke-linecap='round'/><line x1='86' y1='14' x2='86' y2='86' stroke='%23C5A572' stroke-width='3' stroke-linecap='round'/><line x1='86' y1='86' x2='14' y2='86' stroke='%23C5A572' stroke-width='3' stroke-linecap='round'/><line x1='14' y1='86' x2='14' y2='50' stroke='%23C5A572' stroke-width='3' stroke-linecap='round'/><line x1='28' y1='14' x2='28' y2='28' stroke='%23C5A572' stroke-width='2.2'/><polygon points='25,29 31,29 36,42 20,42' fill='%23C5A572'/><line x1='58' y1='46' x2='58' y2='78' stroke='%23FFFFFF' stroke-width='5.2'/><line x1='58' y1='46' x2='76' y2='46' stroke='%23FFFFFF' stroke-width='5.2'/><line x1='58' y1='62' x2='72' y2='62' stroke='%23FFFFFF' stroke-width='4.5'/><line x1='58' y1='78' x2='76' y2='78' stroke='%23FFFFFF' stroke-width='5.2'/></svg>" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Tailwind CSS Play CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              luxury: {
+                beige: '#F7F4EE',
+                'beige-light': '#FAF8F5',
+                'beige-dark': '#EFE9DF',
+                'beige-border': '#E4DCD0',
+                charcoal: '#121316',
+                'charcoal-light': '#1E2024',
+                'charcoal-muted': '#4A4D55',
+                gold: '#C5A572',
+                'gold-light': '#DFC28D',
+                'gold-dark': '#9A7A48',
+                'gold-subtle': '#E8D5B5',
+                obsidian: '#070809',
+                'obsidian-card': '#0E1013',
+                'obsidian-border': '#1F2228',
+                silver: '#E5E7EB',
+                'silver-bright': '#F9FAFB',
+              }
+            },
+            fontFamily: {
+              serif: ['Cinzel', 'Playfair Display', 'Georgia', 'serif'],
+              editorial: ['"Cormorant Garamond"', 'Playfair Display', 'serif'],
+              sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            },
+            boxShadow: {
+              'luxury': '0 20px 40px -15px rgba(18, 19, 22, 0.07), 0 0 1px 1px rgba(18, 19, 22, 0.05)',
+              'luxury-hover': '0 30px 60px -20px rgba(18, 19, 22, 0.12), 0 0 1px 1px rgba(18, 19, 22, 0.08)',
+              'plaque': '0 35px 70px -15px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.1) inset',
+              'gold-glow': '0 0 25px rgba(197, 165, 114, 0.3)',
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      body {
+        background-color: #F7F4EE;
+        color: #121316;
+        margin: 0;
+        padding: 0;
+        font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      }
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #EFE9DF;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #C5A572;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <!-- Standalone browser script runs immediately in any browser -->
+    <script src="./src/standalone-app.js"></script>
+
+    <!-- Vite module entry point (active when served via Vite dev server) -->
+    <script type="module" src="./src/main.tsx"></script>
+  </body>
+</html>
