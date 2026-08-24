@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { BRAND_DETAILS, MATERIAL_SHOWCASE } from '../utils/constants';
-import { MapPin, Clock, Navigation, Phone, MessageCircle, ArrowUpRight, Sparkles, Building2, Layers } from 'lucide-react';
+import { MapPin, Clock, Navigation, Phone, MessageCircle, ArrowUpRight, Building2, Layers } from 'lucide-react';
 import { playTactileClick } from '../utils/audio';
 
 export const StudioSection: React.FC = () => {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ConsultationSubmission } from '../types';
-import { Shield, X, Lock, CheckCircle, Download, UserCheck, RefreshCw, KeyRound, AlertCircle, Phone, Calendar } from 'lucide-react';
+import { Shield, X, Download, RefreshCw, KeyRound, AlertCircle, Phone, Calendar } from 'lucide-react';
 import { playTactileClick, playSuccessChord } from '../utils/audio';
 
 interface StaffModalProps {

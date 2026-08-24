@@ -1,8 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { EspacioMonogram } from './EspacioMonogram';
-import { BRAND_DETAILS } from '../utils/constants';
-import { Sparkles, Eye, ShieldCheck, Layers } from 'lucide-react';
+import { Sparkles, Eye, ShieldCheck } from 'lucide-react';
 import { playTactileClick } from '../utils/audio';
 
 interface Plaque3DProps {

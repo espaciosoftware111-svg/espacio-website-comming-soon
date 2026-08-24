@@ -9,40 +9,25 @@ import {
   Phone,
   Instagram,
   Mail,
-  MapPin,
   Clock,
-  Navigation,
   Sparkles,
-  Shield,
   Layers,
-  ExternalLink,
-  Volume2,
-  VolumeX,
 } from 'lucide-react';
-import { isSoundEnabled, setSoundEnabled } from '../utils/audio';
 
 interface PublicComingSoonProps {
   settings: SiteSettings;
-  onOpenAdmin: () => void;
-  onReplayIntro: () => void;
+  onOpenAdmin?: () => void;
+  onReplayIntro?: () => void;
   isTransitioningFromIntro?: boolean;
 }
 
 export const PublicComingSoon: React.FC<PublicComingSoonProps> = ({
   settings,
-  onOpenAdmin,
-  onReplayIntro,
-  isTransitioningFromIntro = false,
 }) => {
   const [timeLeft, setTimeLeft] = useState({ days: 14, hours: 8, minutes: 42, seconds: 19 });
-  const [soundOn, setSoundOn] = useState(true);
 
   const primaryTagline = settings.taglines?.primary || settings.branding.tagline1 || 'Designing Spaces';
   const secondaryTagline = settings.taglines?.secondary || settings.branding.tagline2 || 'Defining Lifestyles';
-
-  useEffect(() => {
-    setSoundOn(isSoundEnabled());
-  }, []);
 
   // Countdown timer calculation
   useEffect(() => {
@@ -70,13 +55,6 @@ export const PublicComingSoon: React.FC<PublicComingSoonProps> = ({
     return () => clearInterval(interval);
   }, [settings.countdown.enabled, settings.countdown.targetDate]);
 
-  const toggleSound = () => {
-    const next = !soundOn;
-    setSoundOn(next);
-    setSoundEnabled(next);
-    if (next) playTactileClick();
-  };
-
   const handleButtonClick = (type: 'whatsapp' | 'call' | 'instagram' | 'email' | 'maps') => {
     playTactileClick();
     trackAnalyticsClick(type);
@@ -93,7 +71,7 @@ export const PublicComingSoon: React.FC<PublicComingSoonProps> = ({
       case 'email':
         return <Mail className="w-4 h-4 text-blue-600" />;
       default:
-        return <ExternalLink className="w-4 h-4 text-luxury-gold-dark" />;
+        return <MessageCircle className="w-4 h-4 text-luxury-gold" />;
     }
   };
 
@@ -101,11 +79,9 @@ export const PublicComingSoon: React.FC<PublicComingSoonProps> = ({
     <motion.div
       initial={{ opacity: 0, y: 70 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
-      style={{
-        backgroundColor: settings.appearance.primaryBgColor || '#F7F4EE',
-      }}
-      className="min-h-screen text-luxury-charcoal font-sans antialiased relative overflow-hidden flex flex-col justify-between selection:bg-luxury-gold/30 selection:text-luxury-charcoal"
+      transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
+      className="min-h-screen relative flex flex-col justify-between overflow-x-hidden selection:bg-luxury-gold selection:text-luxury-charcoal"
+      style={{ backgroundColor: settings.appearance.primaryBgColor }}
     >
       {/* PENDANT LIGHT HANGING OVER HEADER WITH RADIANT WARMTH */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 pointer-events-none z-10 w-full max-w-4xl flex flex-col items-center">
@@ -176,7 +152,7 @@ export const PublicComingSoon: React.FC<PublicComingSoonProps> = ({
             </div>
           )}
 
-          {/* Right: Architectural Studio Presence Pill (Balanced Symmetry) */}
+          {/* Right: Architectural Studio Presence Pill */}
           <div className="flex items-center gap-3">
             <div className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 border border-luxury-beige-border shadow-sm backdrop-blur-sm select-none">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
@@ -198,8 +174,6 @@ export const PublicComingSoon: React.FC<PublicComingSoonProps> = ({
           transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           className="text-center space-y-6 pt-4"
         >
-
-
           {/* Hero Tagline Connection */}
           {settings.taglines?.showInHero !== false && (
             <div className="max-w-md mx-auto py-1">

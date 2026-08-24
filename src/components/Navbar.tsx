@@ -1,8 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { EspacioMonogram } from './EspacioMonogram';
-import { Shield, Volume2, VolumeX, Sparkles, Compass } from 'lucide-react';
-import { BRAND_DETAILS } from '../utils/constants';
+import { Shield, Volume2, VolumeX } from 'lucide-react';
 import { isSoundEnabled, setSoundEnabled, playTactileClick } from '../utils/audio';
 
 interface NavbarProps {
@@ -10,7 +9,7 @@ interface NavbarProps {
   onReplayIntro?: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onOpenStaffModal, onReplayIntro }) => {
+export const Navbar: React.FC<NavbarProps> = ({ onOpenStaffModal }) => {
   const [soundOn, setSoundOn] = React.useState(true);
 
   React.useEffect(() => {

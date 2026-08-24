@@ -2,17 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Plaque3D } from './Plaque3D';
 import { BRAND_DETAILS, LAUNCH_MILESTONES } from '../utils/constants';
-import { Sparkles, Clock, Calendar, ChevronRight, PhoneCall, MessageCircle, MapPin, CheckCircle2 } from 'lucide-react';
+import { Clock, Calendar, PhoneCall, MessageCircle } from 'lucide-react';
 import { playTactileClick } from '../utils/audio';
 
 interface HeroSectionProps {
   onScrollToConsultation: () => void;
-  onScrollToStudio: () => void;
+  onScrollToStudio?: () => void;
 }
 
 export const HeroSection: React.FC<HeroSectionProps> = ({
   onScrollToConsultation,
-  onScrollToStudio,
 }) => {
   // Live Countdown Timer (Target: 14 days from current date)
   const [timeLeft, setTimeLeft] = useState({
@@ -21,8 +20,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     minutes: 42,
     seconds: 19,
   });
-
-  const [activeTab, setActiveTab] = useState<'timeline' | 'highlights'>('timeline');
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -46,11 +43,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   const handleBookClick = () => {
     playTactileClick();
     onScrollToConsultation();
-  };
-
-  const handleStudioClick = () => {
-    playTactileClick();
-    onScrollToStudio();
   };
 
   return (
