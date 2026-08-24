@@ -33,17 +33,22 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenStaffModal }) => {
   return (
     <header className="sticky top-0 z-40 w-full backdrop-blur-md bg-luxury-beige/85 border-b border-luxury-beige-border/80 transition-all">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-        {/* Left: Minimal ESPACIO Text Logo & Monogram */}
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-luxury-charcoal flex items-center justify-center p-1.5 shadow-md">
-            <EspacioMonogram size={28} variant="silver" />
+        {/* Left: Minimal ESPACIO Text Logo & Monogram (Image 2 Lockup Design) */}
+        <div className="flex items-center gap-3 lg:gap-4 select-none">
+          <div className="w-10 h-10 lg:w-15 lg:h-15 xl:w-16 xl:h-16 rounded-xl lg:rounded-2xl bg-[#121316] border border-[#C5A572]/40 flex items-center justify-center p-1.5 lg:p-2.5 shadow-md shrink-0">
+            <EspacioMonogram size="100%" className="w-full h-full" variant="white" isLightOn={true} glow={true} />
           </div>
-          <div className="flex flex-col">
-            <span className="font-serif text-lg font-normal tracking-[0.22em] text-luxury-charcoal leading-none">
+          <div className="flex flex-col justify-center min-w-[130px] lg:min-w-[200px]">
+            <span className="font-sans text-lg lg:text-2xl xl:text-3xl font-bold tracking-[0.22em] lg:tracking-[0.26em] text-luxury-charcoal leading-none">
               ESPACIO
             </span>
-            <span className="text-[9px] tracking-[0.28em] font-semibold text-luxury-gold uppercase mt-1">
-              INTERIORS & MODULARS
+            <div className="flex items-center gap-1.5 sm:gap-2 my-1 lg:my-1.5 w-full">
+              <span className="flex-1 h-[1.5px] bg-[#C5A572] rounded-full" />
+              <span className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-[#C5A572] rotate-45 shrink-0" />
+              <span className="flex-1 h-[1.5px] bg-[#C5A572] rounded-full" />
+            </div>
+            <span className="text-[8px] lg:text-[11px] xl:text-[12px] tracking-[0.28em] font-bold text-luxury-charcoal uppercase leading-none">
+              INTERIORS AND MODULAR
             </span>
           </div>
         </div>
@@ -66,7 +71,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenStaffModal }) => {
         </div>
 
         {/* Right: Sound Toggle + Staff Login */}
-        <div className="flex items-center gap-2 sm:gap-3">
+        <div className="flex items-center gap-2 sm:gap-3 lg:gap-4 select-none">
           {/* Sound Toggle */}
           <button
             onClick={toggleSound}

@@ -1,9 +1,9 @@
 import { SiteSettings, DEFAULT_SITE_SETTINGS, AnalyticsData } from '../types/settings';
 
-const SETTINGS_KEY = 'espacio_site_settings_v3';
-const DRAFT_KEY = 'espacio_draft_settings_v3';
-const ANALYTICS_KEY = 'espacio_analytics_v3';
-const ADMIN_AUTH_KEY = 'espacio_admin_auth_v3';
+const SETTINGS_KEY = 'espacio_site_settings_v7';
+const DRAFT_KEY = 'espacio_draft_settings_v7';
+const ANALYTICS_KEY = 'espacio_analytics_v7';
+const ADMIN_AUTH_KEY = 'espacio_admin_auth_v7';
 
 const DEFAULT_ANALYTICS: AnalyticsData = {
   whatsappClicks: 24,
@@ -39,7 +39,11 @@ export const getSiteSettings = (): SiteSettings => {
       return DEFAULT_SITE_SETTINGS;
     }
     const parsed = JSON.parse(raw);
-    return { ...DEFAULT_SITE_SETTINGS, ...parsed };
+    const settings = { ...DEFAULT_SITE_SETTINGS, ...parsed };
+    if (settings.branding?.subTitle) {
+      settings.branding.subTitle = settings.branding.subTitle.replace('MODULARS', 'MODULAR');
+    }
+    return settings;
   } catch {
     return DEFAULT_SITE_SETTINGS;
   }
@@ -52,7 +56,11 @@ export const getDraftSettings = (): SiteSettings => {
     if (!raw) {
       return getSiteSettings();
     }
-    return { ...DEFAULT_SITE_SETTINGS, ...JSON.parse(raw) };
+    const settings = { ...DEFAULT_SITE_SETTINGS, ...JSON.parse(raw) };
+    if (settings.branding?.subTitle) {
+      settings.branding.subTitle = settings.branding.subTitle.replace('MODULARS', 'MODULAR');
+    }
+    return settings;
   } catch {
     return getSiteSettings();
   }

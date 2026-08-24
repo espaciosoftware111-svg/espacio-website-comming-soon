@@ -6,17 +6,17 @@
   if (!root) return;
 
   // --- LOCAL STORAGE KEYS ---
-  const SETTINGS_KEY = 'espacio_site_settings_v3';
-  const DRAFT_KEY = 'espacio_draft_settings_v3';
-  const ANALYTICS_KEY = 'espacio_analytics_v3';
-  const AUTH_KEY = 'espacio_admin_auth_v3';
+  const SETTINGS_KEY = 'espacio_site_settings_v7';
+  const DRAFT_KEY = 'espacio_draft_settings_v7';
+  const ANALYTICS_KEY = 'espacio_analytics_v7';
+  const AUTH_KEY = 'espacio_admin_auth_v7';
 
   // --- DEFAULT SETTINGS ---
   const DEFAULT_SETTINGS = {
     status: 'COMING_SOON',
     branding: {
       name: 'ESPACIO',
-      subTitle: 'INTERIORS AND MODULARS',
+      subTitle: 'INTERIORS AND MODULAR',
       tagline1: 'Designing Spaces',
       tagline2: 'Defining Lifestyles',
       estdText: 'ESTD. HYDERABAD',
@@ -31,8 +31,8 @@
       showInFooter: true,
     },
     hero: {
-      mainHeading: 'WEBSITE LAUNCHING SOON',
-      description: 'Crafting thoughtfully designed interiors and modular spaces that bring functionality, elegance, and individuality together.',
+      mainHeading: "WE'RE GETTING BETTER FOR YOU",
+      description: "We’re making a few improvements behind the scenes to bring you a better experience.",
       launchBadgeText: 'SYSTEM UPGRADE & LAUNCH IN PROGRESS',
       showBadge: true,
     },
@@ -66,12 +66,12 @@
     },
     modularDescription: {
       heading: 'Designed for the way you live.',
-      body: 'ESPACIO Interiors & Modulars creates refined interior spaces, modular kitchens, wardrobes, furniture and customized solutions designed around modern lifestyles.',
+      body: 'ESPACIO Interiors & Modular creates refined interior spaces, modular kitchens, wardrobes, furniture and customized solutions designed around modern lifestyles.',
       features: [
         { title: 'Turnkey Luxury Interiors', desc: 'End-to-end villa & apartment execution with bespoke craftsmanship.' },
         { title: 'Modular Kitchens & Systems', desc: 'German & Italian precision fittings with motorized soft-close runners.' },
         { title: 'Curated Materials Vault', desc: 'Imported Italian marble, fluted natural veneers, and bronze glass.' },
-        { title: 'Custom Wardrobes & Vanities', desc: 'Walk-in dressing suites with integrated LED lighting and leather accents.' },
+        { title: 'Commercial & Corporate Spaces', desc: 'Executive workspaces, boutique retail environments, and luxury commercial architecture.' },
       ],
     },
     buttons: [
@@ -105,7 +105,11 @@
   function getSettings() {
     try {
       const raw = localStorage.getItem(SETTINGS_KEY);
-      return raw ? { ...DEFAULT_SETTINGS, ...JSON.parse(raw) } : DEFAULT_SETTINGS;
+      const s = raw ? { ...DEFAULT_SETTINGS, ...JSON.parse(raw) } : DEFAULT_SETTINGS;
+      if (s.branding && s.branding.subTitle) {
+        s.branding.subTitle = s.branding.subTitle.replace('MODULARS', 'MODULAR');
+      }
+      return s;
     } catch {
       return DEFAULT_SETTINGS;
     }
@@ -114,7 +118,11 @@
   function getDraftSettings() {
     try {
       const raw = localStorage.getItem(DRAFT_KEY);
-      return raw ? { ...DEFAULT_SETTINGS, ...JSON.parse(raw) } : getSettings();
+      const s = raw ? { ...DEFAULT_SETTINGS, ...JSON.parse(raw) } : getSettings();
+      if (s.branding && s.branding.subTitle) {
+        s.branding.subTitle = s.branding.subTitle.replace('MODULARS', 'MODULAR');
+      }
+      return s;
     } catch {
       return getSettings();
     }
@@ -246,7 +254,7 @@
 
   window.addEventListener('hashchange', route);
 
-  // EXACT IMAGE 2 SVG LOGO WITH GAPS AROUND E
+  // EXACT SVG LOGO MATCHING UPLOADED REFERENCE
   function getExactLogoSVG(color = '#FFFFFF', isLightOn = false, pendantOffset = 0) {
     return `
       <svg viewBox="0 0 100 100" class="w-full h-full overflow-visible" fill="none">
@@ -259,40 +267,40 @@
           </radialGradient>
         </defs>
 
-        <!-- 1. Upper-Left Horizontal Line -->
-        <line id="svg-top-left" x1="14" y1="14" x2="42" y2="14" stroke="${color}" stroke-width="2.4" stroke-linecap="round" />
+        <!-- 1. Upper-Left Horizontal Line (Lamp Top Bar) -->
+        <line id="svg-top-left" x1="14" y1="14" x2="44" y2="14" stroke="${color}" stroke-width="3.2" stroke-linecap="square" />
         
-        <!-- 2. Upper-Right Horizontal Line (With clear open gap from X=42 to X=54) -->
-        <line id="svg-top-right" x1="54" y1="14" x2="86" y2="14" stroke="${color}" stroke-width="2.4" stroke-linecap="round" />
+        <!-- 2. Upper-Right Horizontal Line (With clear open gap from X=44 to X=54) -->
+        <line id="svg-top-right" x1="54" y1="14" x2="86" y2="14" stroke="${color}" stroke-width="3.2" stroke-linecap="square" />
         
         <!-- 3. Right Vertical Line -->
-        <line id="svg-right-vert" x1="86" y1="14" x2="86" y2="86" stroke="${color}" stroke-width="2.4" stroke-linecap="round" />
+        <line id="svg-right-vert" x1="86" y1="14" x2="86" y2="86" stroke="${color}" stroke-width="3.2" stroke-linecap="square" />
         
         <!-- 4. Bottom Horizontal Line -->
-        <line id="svg-bottom-horiz" x1="86" y1="86" x2="14" y2="86" stroke="${color}" stroke-width="2.4" stroke-linecap="round" />
+        <line id="svg-bottom-horiz" x1="86" y1="86" x2="14" y2="86" stroke="${color}" stroke-width="3.2" stroke-linecap="square" />
         
-        <!-- 5. Left Vertical Line (CRITICAL: STOPS AT Y=50, PRESERVING OPEN TOP-LEFT CORNER!) -->
-        <line id="svg-left-vert" x1="14" y1="86" x2="14" y2="50" stroke="${color}" stroke-width="2.4" stroke-linecap="round" />
+        <!-- 5. Left Vertical Line (STOPS AT Y=48, PRESERVING OPEN TOP-LEFT CORNER!) -->
+        <line id="svg-left-vert" x1="14" y1="86" x2="14" y2="48" stroke="${color}" stroke-width="3.2" stroke-linecap="square" />
 
-        <!-- 6. Bold Geometric Sans-Serif 'E' in Lower-Right Quadrant (WITH 8px GAP FROM BOTTOM & 10px GAP FROM RIGHT) -->
+        <!-- 6. Bold Geometric Sans-Serif 'E' in Lower-Right Quadrant -->
         <g id="svg-letter-e" opacity="0">
-          <line x1="58" y1="46" x2="58" y2="78" stroke="${color}" stroke-width="4.8" stroke-linecap="square" />
-          <line x1="58" y1="46" x2="76" y2="46" stroke="${color}" stroke-width="4.8" stroke-linecap="square" />
-          <line x1="58" y1="62" x2="72" y2="62" stroke="${color}" stroke-width="4.2" stroke-linecap="square" />
+          <line x1="58" y1="44" x2="58" y2="78" stroke="${color}" stroke-width="4.8" stroke-linecap="square" />
+          <line x1="58" y1="44" x2="76" y2="44" stroke="${color}" stroke-width="4.8" stroke-linecap="square" />
+          <line x1="58" y1="61" x2="72" y2="61" stroke="${color}" stroke-width="4.2" stroke-linecap="square" />
           <line x1="58" y1="78" x2="76" y2="78" stroke="${color}" stroke-width="4.8" stroke-linecap="square" />
         </g>
 
         <!-- 7. Minimal Architectural Pendant Lamp (Upper-Left Area) -->
         <g id="svg-pendant-lamp" opacity="0" transform="translate(0, ${pendantOffset})">
-          <line x1="28" y1="14" x2="28" y2="28" stroke="${color}" stroke-width="2.0" stroke-linecap="round" />
-          <circle cx="28" cy="28" r="1.5" fill="${color}" />
-          <polygon points="25,29 31,29 36,42 20,42" fill="${color}" stroke="${color}" stroke-width="0.8" stroke-linejoin="round" />
+          <line x1="29" y1="14" x2="29" y2="28" stroke="${color}" stroke-width="2.4" stroke-linecap="round" />
+          <polygon points="25.5,28 32.5,28 38,42 20,42" fill="${color}" stroke="${color}" stroke-width="0.8" stroke-linejoin="round" />
           
           <!-- Light Glow Cone -->
           <g id="svg-light-glow" opacity="${isLightOn ? '1' : '0'}">
-            <polygon points="20,42 36,42 46,78 10,78" fill="url(#pendantBeamMaster)" opacity="0.9" />
-            <ellipse cx="28" cy="42" rx="5" ry="1.2" fill="#FFFBEA" />
-            <circle cx="28" cy="43" r="3" fill="#FFEAA7" opacity="0.9" />
+            <ellipse cx="29" cy="46" rx="14" ry="10" fill="url(#pendantBeamMaster)" opacity="0.9" />
+            <polygon points="20,42 38,42 48,68 10,68" fill="url(#pendantBeamMaster)" opacity="0.85" />
+            <ellipse cx="28" cy="42" rx="7" ry="1.6" fill="#FFFCE6" />
+            <circle cx="28" cy="42.5" r="2.8" fill="#FFEAA7" opacity="0.95" />
           </g>
         </g>
       </svg>
@@ -311,7 +319,7 @@
     root.innerHTML = `
       <div id="app-container" class="min-h-screen relative overflow-hidden bg-[#08090C] text-white">
         
-        <!-- 1. INTRO FULLSCREEN OVERLAY (EXACT IMAGE 2 RECREATION) -->
+        <!-- 1. INTRO FULLSCREEN OVERLAY (EXACT RECREATION) -->
         <div id="intro-screen" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#08090C] text-white select-none transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]">
           <div id="ambient-radial" class="absolute inset-0 pointer-events-none transition-all duration-700" style="background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.04) 0%, rgba(8,9,12,1) 65%);"></div>
           
@@ -327,11 +335,19 @@
             </div>
 
             <div id="text-reveal-group" class="space-y-2 opacity-0 transition-all duration-500 transform translate-y-4">
-              <h1 class="font-sans text-3xl sm:text-4xl md:text-5xl font-light text-white tracking-[0.25em] pl-[0.25em] leading-tight">
+              <h1 class="font-sans text-3xl sm:text-4xl md:text-5xl font-medium text-white tracking-[0.32em] pl-[0.32em] leading-tight">
                 ${settings.branding.name}
               </h1>
-              <p class="text-[11px] sm:text-xs font-semibold text-[#C5A572] tracking-[0.3em] pl-[0.3em] uppercase">
-                ${settings.branding.subTitle}
+
+              <!-- Gold Accent Divider Bar with Center Square -->
+              <div class="flex items-center justify-center gap-2 max-w-[200px] mx-auto my-2">
+                <div class="flex-1 h-[1.5px] bg-[#C5A572]"></div>
+                <div class="w-1.5 h-1.5 bg-[#C5A572]"></div>
+                <div class="flex-1 h-[1.5px] bg-[#C5A572]"></div>
+              </div>
+
+              <p class="text-[10px] sm:text-xs font-semibold text-neutral-300 tracking-[0.32em] pl-[0.32em] uppercase">
+                ${settings.branding.subTitle || 'INTERIORS AND MODULAR'}
               </p>
               
               <div class="w-14 h-[1px] bg-gradient-to-r from-transparent via-[#C5A572] to-transparent mx-auto my-2.5 opacity-80"></div>
@@ -351,196 +367,133 @@
         </div>
 
         <!-- 2. PUBLIC COMING SOON WEBSITE (SMOOTH UPWARD SLIDE) -->
-        <div id="public-website" class="min-h-screen flex flex-col justify-between opacity-0 transform translate-y-16 transition-all duration-800 ease-[cubic-bezier(0.16,1,0.3,1)]" style="background-color: ${settings.appearance.primaryBgColor}; color: #121316;">
+        <div id="public-website" class="min-h-screen flex flex-col justify-between opacity-0 transform translate-y-16 transition-all duration-800 ease-[cubic-bezier(0.16,1,0.3,1)] relative overflow-hidden" style="background-color: ${settings.appearance.primaryBgColor}; color: #121316;">
           
-          <!-- Pendant Transition Lamp -->
-          <div class="absolute top-0 left-1/2 -translate-x-1/2 pointer-events-none z-10 w-full max-w-4xl flex flex-col items-center">
-            <div id="header-pendant" class="relative flex flex-col items-center transition-all duration-1000" style="transform: translateY(0px);">
-              <div class="w-[1.5px] h-14 bg-gradient-to-b from-neutral-800 via-neutral-500 to-[#121316]"></div>
-              <div class="w-2 h-2 rounded-full bg-[#C5A572] shadow-sm -mt-0.5"></div>
-              <div class="w-10 h-7 bg-[#121316] rounded-t-sm shadow-xl relative flex items-end justify-center" style="clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);">
-                <div class="w-4 h-1.5 bg-[#FFFBEA] rounded-full filter blur-[1px] mb-0.5"></div>
+          <!-- Exact User Uploaded Luxury Interior Architectural Background -->
+          <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+            <img src="./espacio-luxury-living.jpg" alt="ESPACIO Luxury Living Architecture" class="w-full h-full object-cover object-center" />
+            <div class="absolute inset-0" style="background: radial-gradient(ellipse at 50% 35%, rgba(247, 244, 238, 0.40) 0%, rgba(247, 244, 238, 0.60) 100%);"></div>
+          </div>
+
+          <!-- Realistic Swinging Pendant Light -->
+          <div class="absolute top-0 left-1/2 -translate-x-1/2 pointer-events-none z-20 w-full max-w-2xl flex flex-col items-center">
+            <div class="relative flex flex-col items-center pointer-events-none select-none">
+              <div class="absolute -top-16 left-1/2 -translate-x-1/2 w-[300px] xs:w-[360px] sm:w-[540px] md:w-[720px] h-[280px] sm:h-[380px] pointer-events-none -z-10" style="background: radial-gradient(ellipse at 50% 25%, rgba(245, 158, 11, 0.28) 0%, rgba(217, 119, 6, 0.16) 35%, rgba(247, 244, 238, 0) 70%);"></div>
+              <div class="absolute top-12 sm:top-16 left-1/2 -translate-x-1/2 w-[220px] xs:w-[280px] sm:w-[340px] md:w-[480px] h-[140px] sm:h-[180px] pointer-events-none -z-10 filter blur-xl opacity-65" style="background: radial-gradient(circle, rgba(254, 243, 199, 0.6) 0%, rgba(251, 191, 36, 0.22) 50%, transparent 80%);"></div>
+
+              <div class="animate-lamp-swing relative flex flex-col items-center -mt-14 xs:-mt-16 sm:-mt-22 md:-mt-26">
+                <img src="https://res.cloudinary.com/dkp6jeboz/image/upload/v1787583775/ChatGPT_Image_Aug_24_2026_04_31_24_PM_3_ycieeq.png" alt="ESPACIO Luxury Pendant Light" class="w-[125px] h-[170px] xs:w-[145px] xs:h-[195px] sm:w-[170px] sm:h-[230px] md:w-[195px] md:h-[260px] object-contain drop-shadow-[0_12px_28px_rgba(0,0,0,0.22)]" />
               </div>
-              <div class="absolute top-20 w-[640px] h-[400px] rounded-full pointer-events-none" style="background: radial-gradient(ellipse at 50% 20%, rgba(197,165,114,0.24) 0%, rgba(247,244,238,0) 70%);"></div>
             </div>
           </div>
 
-          <!-- Navigation (Ultra-Luxury Architectural Header) -->
-          <header class="relative z-30 w-full backdrop-blur-md bg-[#F7F4EE]/90 border-b border-[#E4DCD0]/80 shadow-[0_4px_30px_-10px_rgba(18,19,22,0.04)]">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+          <!-- Clean Borderless Navigation -->
+          <header class="relative z-30 w-full max-w-full bg-transparent overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 lg:h-24 flex items-center justify-between">
               
-              <!-- Left: Brand Monogram & Title -->
-              <div class="flex items-center gap-3 select-none">
-                <div class="w-10 h-10 rounded-xl bg-[#121316] border border-[#C5A572]/30 flex items-center justify-center p-1.5 shadow-[0_4px_12px_rgba(0,0,0,0.15)] transition-transform hover:scale-105">
+              <!-- Left: Brand Monogram & Title - Exact Image 2 Lockup Structure -->
+              <div class="flex items-center gap-3 lg:gap-4 select-none">
+                <div class="w-9 h-9 sm:w-11 sm:h-11 lg:w-16 lg:h-16 rounded-xl lg:rounded-2xl bg-[#121316] border border-[#C5A572]/40 flex items-center justify-center p-1 sm:p-1.5 lg:p-2.5 shadow-[0_4px_16px_rgba(0,0,0,0.25)] transition-transform hover:scale-105 shrink-0">
                   ${getExactLogoSVG('#FFFFFF', false, 0)}
                 </div>
-                <div class="flex flex-col">
-                  <span class="font-sans text-lg font-medium tracking-[0.24em] text-[#121316] leading-none">${settings.branding.name}</span>
-                  <span class="text-[9px] tracking-[0.28em] font-semibold text-[#C5A572] uppercase mt-1">${settings.branding.subTitle}</span>
-                </div>
-              </div>
-
-              <!-- Center: Premium Jewel Tagline Capsule -->
-              ${settings.taglines?.showInHeader !== false ? `
-                <div class="relative group select-none">
-                  <div class="absolute -inset-0.5 rounded-full bg-gradient-to-r from-[#C5A572]/30 via-[#DFC28D]/40 to-[#C5A572]/30 opacity-70 blur-[3px] pointer-events-none"></div>
-                  <div class="relative flex items-center gap-2.5 px-6 py-2 rounded-full bg-gradient-to-r from-white/95 via-[#FAF8F5] to-white/95 border border-[#C5A572]/45 shadow-[0_4px_20px_-4px_rgba(197,165,114,0.25)] backdrop-blur-md">
-                    <span class="text-[#C5A572] animate-pulse">✦</span>
-                    <span class="font-serif italic text-xs tracking-[0.14em] text-[#121316] whitespace-nowrap">
-                      <strong class="font-semibold text-[#121316]">${primaryTagline}</strong>
-                      <span class="mx-1.5 text-[#C5A572]">·</span>
-                      <span class="text-[#9A7A48] font-semibold">${secondaryTagline}</span>
-                    </span>
+                <div class="flex flex-col justify-center min-w-[130px] sm:min-w-[160px] lg:min-w-[220px]">
+                  <span class="font-sans text-base sm:text-lg md:text-xl lg:text-3xl font-bold tracking-[0.22em] lg:tracking-[0.26em] text-[#08090C] leading-none drop-shadow-[0_1px_8px_rgba(255,255,255,0.9)]">${settings.branding.name}</span>
+                  
+                  <!-- Thin Gold Line — Gold Square Dot — Thin Gold Line (Matching Image 2) -->
+                  <div class="flex items-center gap-1.5 sm:gap-2 my-1 lg:my-1.5 w-full">
+                    <span class="flex-1 h-[1.5px] bg-[#C5A572] rounded-full"></span>
+                    <span class="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-[#C5A572] rotate-45 shrink-0"></span>
+                    <span class="flex-1 h-[1.5px] bg-[#C5A572] rounded-full"></span>
                   </div>
-                </div>
-              ` : ''}
 
-              <!-- Right: Architectural Studio Presence Pill (Balanced Symmetry) -->
-              <div class="flex items-center gap-3">
-                <div class="hidden sm:flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 border border-[#E4DCD0] shadow-sm backdrop-blur-sm select-none">
-                  <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0"></span>
-                  <span class="text-[11px] font-mono uppercase tracking-wider text-[#121316] font-medium">
-                    Aziznagar Studio · Hyd
-                  </span>
+                  <span class="text-[7.5px] sm:text-[9px] md:text-[10px] lg:text-[12.5px] tracking-[0.28em] sm:tracking-[0.32em] font-bold text-[#121316] uppercase leading-none drop-shadow-[0_1px_4px_rgba(255,255,255,0.9)]">INTERIORS AND MODULAR</span>
                 </div>
               </div>
             </div>
           </header>
 
           <!-- Main Body Content -->
-          <main class="relative z-20 flex-1 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-16">
+          <main class="relative z-20 flex-1 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6 md:pt-8 pb-3 sm:pb-5 flex flex-col justify-center gap-4 sm:gap-6 overflow-hidden">
             
             <!-- Hero Section -->
-            <section class="text-center space-y-6 pt-4">
+            <section class="text-center space-y-2.5 sm:space-y-4 pt-1 w-full">
 
               ${settings.taglines?.showInHero !== false ? `
-                <div class="max-w-md mx-auto py-1">
-                  <p class="font-serif italic text-lg sm:text-xl text-neutral-700 tracking-wide">
+                <div class="max-w-lg mx-auto py-0.5 px-2">
+                  <p class="font-serif italic font-bold text-base sm:text-xl md:text-2xl text-[#08090C] tracking-wide drop-shadow-[0_2px_12px_rgba(255,255,255,0.95)]">
                     <span>&ldquo;${primaryTagline}</span>
-                    <span class="mx-1.5 text-[#C5A572]">·</span>
-                    <span class="text-[#9A7A48] font-medium">${secondaryTagline}&rdquo;</span>
+                    <span class="mx-1.5 sm:mx-2 text-[#9A7A48]">·</span>
+                    <span class="text-[#8A662E] font-bold">${secondaryTagline}&rdquo;</span>
                   </p>
                 </div>
               ` : ''}
 
-              <h1 class="font-serif text-4xl sm:text-5xl md:text-6xl text-[#121316] font-light tracking-tight leading-[1.12] max-w-3xl mx-auto">
+              <h1 class="font-serif text-3xl sm:text-5xl md:text-6xl text-[#08090C] font-bold tracking-tight leading-[1.15] sm:leading-[1.12] max-w-3xl mx-auto px-2 drop-shadow-[0_3px_16px_rgba(255,255,255,0.95)]">
                 ${settings.hero.mainHeading}
               </h1>
 
-              <p class="text-base sm:text-lg text-[#4A4D55] font-light leading-relaxed max-w-2xl mx-auto">
+              <p class="text-xs sm:text-base md:text-lg text-[#16171A] font-medium leading-relaxed max-w-2xl mx-auto px-2 sm:px-0 drop-shadow-[0_1px_8px_rgba(255,255,255,0.9)]">
                 ${settings.hero.description}
               </p>
 
-              <!-- Countdown -->
-              ${settings.countdown.enabled ? `
-                <div class="max-w-xl mx-auto p-6 rounded-3xl bg-white/85 border border-[#E4DCD0] shadow-sm space-y-4">
-                  <div class="flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-[#121316] border-b border-[#E4DCD0]/60 pb-3">
-                    <span>⏱️ ${settings.countdown.label}</span>
-                    <span class="text-emerald-700 flex items-center gap-1.5 lowercase font-mono">
-                      <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                      <span>studio active</span>
-                    </span>
-                  </div>
-                  <div class="grid grid-cols-4 gap-3 text-center">
-                    <div class="p-3 rounded-2xl bg-[#FAF8F5] border border-[#E4DCD0]"><span id="pub-cnt-d" class="font-serif text-2xl sm:text-3xl font-medium block">14</span><span class="text-[10px] uppercase font-mono text-[#4A4D55]">Days</span></div>
-                    <div class="p-3 rounded-2xl bg-[#FAF8F5] border border-[#E4DCD0]"><span id="pub-cnt-h" class="font-serif text-2xl sm:text-3xl font-medium block">08</span><span class="text-[10px] uppercase font-mono text-[#4A4D55]">Hours</span></div>
-                    <div class="p-3 rounded-2xl bg-[#FAF8F5] border border-[#E4DCD0]"><span id="pub-cnt-m" class="font-serif text-2xl sm:text-3xl font-medium block">42</span><span class="text-[10px] uppercase font-mono text-[#4A4D55]">Mins</span></div>
-                    <div class="p-3 rounded-2xl bg-[#FAF8F5] border border-[#E4DCD0]"><span id="pub-cnt-s" class="font-serif text-2xl sm:text-3xl font-medium text-[#9A7A48] block">19</span><span class="text-[10px] uppercase font-mono text-[#4A4D55]">Secs</span></div>
-                  </div>
-                  ${settings.countdown.showProgressBar ? `
-                    <div class="space-y-1.5 pt-1">
-                      <div class="flex justify-between text-xs text-[#121316] font-medium">
-                        <span>Architectural Progress</span>
-                        <span class="font-mono text-[#9A7A48]">${settings.countdown.progressPercentage}%</span>
-                      </div>
-                      <div class="w-full h-2 rounded-full bg-[#EFE9DF] overflow-hidden p-0.5">
-                        <div class="h-full rounded-full bg-gradient-to-r from-[#DFC28D] to-[#9A7A48]" style="width: ${settings.countdown.progressPercentage}%;"></div>
-                      </div>
-                    </div>
-                  ` : ''}
+              <!-- 4 Action Buttons (2x2 Grid on Mobile / 1 Row on Laptop View) -->
+              <div class="pt-2 sm:pt-3 w-full max-w-lg md:max-w-3xl lg:max-w-4xl mx-auto">
+                <div class="grid grid-cols-2 md:flex md:flex-row md:flex-nowrap items-center justify-center gap-2 sm:gap-3 lg:gap-4 w-full">
+                  <a id="btn-action-wa" href="https://wa.me/${settings.contact.whatsappRaw}?text=${encodeURIComponent(settings.contact.whatsappDefaultMessage)}" target="_blank" class="min-h-[44px] sm:min-h-[48px] lg:min-h-[52px] w-full md:w-auto md:flex-1 lg:max-w-[220px] flex items-center justify-center gap-1.5 sm:gap-2.5 lg:gap-3 px-2.5 sm:px-4 lg:px-6 py-3 sm:py-3.5 rounded-xl sm:rounded-2xl font-bold text-[11px] sm:text-xs lg:text-sm tracking-wider uppercase bg-white/95 hover:bg-white border-2 border-[#D4C8B8] hover:border-[#8A662E] text-[#08090C] shadow-md transition-all active:scale-95">
+                    <svg class="w-4 h-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
+                    <span class="truncate">WHATSAPP</span>
+                  </a>
+                  <a id="btn-action-call" href="tel:${settings.contact.phoneRaw}" class="min-h-[44px] sm:min-h-[48px] lg:min-h-[52px] w-full md:w-auto md:flex-1 lg:max-w-[220px] flex items-center justify-center gap-1.5 sm:gap-2.5 lg:gap-3 px-2.5 sm:px-4 lg:px-6 py-3 sm:py-3.5 rounded-xl sm:rounded-2xl font-bold text-[11px] sm:text-xs lg:text-sm tracking-wider uppercase bg-white/95 hover:bg-white border-2 border-[#D4C8B8] hover:border-[#8A662E] text-[#08090C] shadow-md transition-all active:scale-95">
+                    <svg class="w-4 h-4 text-amber-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
+                    <span class="truncate">CALL US</span>
+                  </a>
+                  <a id="btn-action-insta" href="${settings.social.instagram}" target="_blank" class="min-h-[44px] sm:min-h-[48px] lg:min-h-[52px] w-full md:w-auto md:flex-1 lg:max-w-[220px] flex items-center justify-center gap-1.5 sm:gap-2.5 lg:gap-3 px-2.5 sm:px-4 lg:px-6 py-3 sm:py-3.5 rounded-xl sm:rounded-2xl font-bold text-[11px] sm:text-xs lg:text-sm tracking-wider uppercase bg-white/95 hover:bg-white border-2 border-[#D4C8B8] hover:border-[#8A662E] text-[#08090C] shadow-md transition-all active:scale-95">
+                    <svg class="w-4 h-4 text-pink-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                    <span class="truncate">INSTAGRAM</span>
+                  </a>
+                  <a id="btn-action-email" href="mailto:${settings.contact.email}" class="min-h-[44px] sm:min-h-[48px] lg:min-h-[52px] w-full md:w-auto md:flex-1 lg:max-w-[220px] flex items-center justify-center gap-1.5 sm:gap-2.5 lg:gap-3 px-2.5 sm:px-4 lg:px-6 py-3 sm:py-3.5 rounded-xl sm:rounded-2xl font-bold text-[11px] sm:text-xs lg:text-sm tracking-wider uppercase bg-white/95 hover:bg-white border-2 border-[#D4C8B8] hover:border-[#8A662E] text-[#08090C] shadow-md transition-all active:scale-95">
+                    <svg class="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                    <span class="truncate">EMAIL US</span>
+                  </a>
                 </div>
-              ` : ''}
-
-              <!-- 4 Action Buttons -->
-              <div class="pt-2 flex flex-wrap items-center justify-center gap-3 sm:gap-4 max-w-2xl mx-auto">
-                <a id="btn-action-wa" href="https://wa.me/${settings.contact.whatsappRaw}?text=${encodeURIComponent(settings.contact.whatsappDefaultMessage)}" target="_blank" class="min-h-[44px] min-w-[140px] flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl font-medium text-xs tracking-wider uppercase bg-emerald-600 hover:bg-emerald-700 text-white shadow-md transition-all active:scale-95">
-                  <span>💬</span>
-                  <span>WHATSAPP</span>
-                </a>
-                <a id="btn-action-call" href="tel:${settings.contact.phoneRaw}" class="min-h-[44px] min-w-[140px] flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl font-medium text-xs tracking-wider uppercase bg-[#121316] hover:bg-[#1E2024] text-white shadow-md transition-all active:scale-95">
-                  <span>📞</span>
-                  <span>CALL US</span>
-                </a>
-                <a id="btn-action-insta" href="${settings.social.instagram}" target="_blank" class="min-h-[44px] min-w-[140px] flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl font-medium text-xs tracking-wider uppercase bg-white hover:bg-[#FAF8F5] border border-[#E4DCD0] text-[#121316] shadow-sm transition-all active:scale-95">
-                  <span>📸</span>
-                  <span>INSTAGRAM</span>
-                </a>
-                <a id="btn-action-email" href="mailto:${settings.contact.email}" class="min-h-[44px] min-w-[140px] flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl font-medium text-xs tracking-wider uppercase bg-white hover:bg-[#FAF8F5] border border-[#E4DCD0] text-[#121316] shadow-sm transition-all active:scale-95">
-                  <span>✉️</span>
-                  <span>EMAIL US</span>
-                </a>
               </div>
 
             </section>
 
             <!-- Modular Business Description -->
-            <section class="rounded-3xl bg-white border border-[#E4DCD0] p-6 sm:p-10 shadow-sm space-y-8">
-              <div class="text-center max-w-2xl mx-auto space-y-2">
-                <span class="text-xs font-bold tracking-[0.2em] text-[#9A7A48] uppercase">Bespoke Architectural Solutions</span>
-                <h2 class="font-serif text-2xl sm:text-3xl text-[#121316]">${settings.modularDescription.heading}</h2>
-                <p class="text-sm text-[#4A4D55] leading-relaxed">${settings.modularDescription.body}</p>
+            <section class="w-full max-w-full rounded-2xl sm:rounded-3xl bg-white/95 border-2 border-[#D4C8B8] p-3.5 sm:p-5 md:p-6 shadow-xl backdrop-blur-md space-y-3 sm:space-y-4 overflow-hidden relative mt-2 sm:mt-3.5">
+              <div class="text-center max-w-2xl mx-auto space-y-0.5 sm:space-y-1 px-1">
+                <span class="text-[10px] sm:text-xs font-bold tracking-[0.2em] text-[#8A662E] uppercase flex items-center justify-center gap-1.5">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                  <span>Bespoke Architectural Solutions</span>
+                </span>
+                <h2 class="font-serif text-lg sm:text-2xl md:text-3xl text-[#08090C] font-bold">${settings.modularDescription.heading}</h2>
+                <p class="text-[11px] sm:text-xs md:text-sm text-[#18191C] font-medium leading-relaxed">${settings.modularDescription.body}</p>
               </div>
 
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                ${settings.modularDescription.features.map(f => `
-                  <div class="p-5 rounded-2xl bg-[#FAF8F5] border border-[#E4DCD0] space-y-1.5">
-                    <h3 class="font-serif text-sm font-semibold text-[#121316]">● ${f.title}</h3>
-                    <p class="text-xs text-[#4A4D55] leading-relaxed">${f.desc}</p>
-                  </div>
-                `).join('')}
+              <!-- Marquee Carousel - Moving Right to Left -->
+              <div class="relative w-full max-w-full overflow-hidden py-0.5 sm:py-1">
+                <div class="absolute left-0 top-0 bottom-0 w-8 sm:w-16 md:w-20 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
+                <div class="absolute right-0 top-0 bottom-0 w-8 sm:w-16 md:w-20 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
+
+                <div class="animate-marquee-right-to-left flex gap-3 sm:gap-4 px-2 sm:px-4 cursor-grab">
+                  ${[...settings.modularDescription.features, ...settings.modularDescription.features, ...settings.modularDescription.features].map(f => `
+                    <div class="w-[240px] sm:w-[290px] md:w-[340px] flex-shrink-0 p-3.5 sm:p-4.5 rounded-xl sm:rounded-2xl bg-[#FAF8F5] border border-[#D4C8B8] space-y-1 sm:space-y-1.5 hover:border-[#8A662E] hover:bg-white hover:shadow-lg transition-all select-none">
+                      <div class="flex items-center gap-2">
+                        <span class="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-[#C5A572] shrink-0"></span>
+                        <h3 class="font-serif text-xs sm:text-sm font-bold text-[#08090C] uppercase tracking-wide">${f.title}</h3>
+                      </div>
+                      <p class="text-[11px] sm:text-xs text-[#25272C] font-medium leading-relaxed pl-3.5 sm:pl-4.5">${f.desc}</p>
+                    </div>
+                  `).join('')}
+                </div>
               </div>
             </section>
 
           </main>
 
-          <!-- Footer with Prominent Brand Philosophy -->
-          <footer class="bg-[#121316] text-white pt-12 pb-10 border-t border-neutral-800 mt-12">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-              
-              <div class="flex flex-col md:flex-row items-center justify-between gap-6 border-b border-white/10 pb-8">
-                <div class="flex items-center gap-3">
-                  <div class="w-12 h-12 rounded-2xl bg-white/10 border border-white/15 flex items-center justify-center p-2">
-                    ${getExactLogoSVG('#FFFFFF', false, 0)}
-                  </div>
-                  <div>
-                    <span class="font-sans text-xl tracking-[0.25em] text-white block">${settings.branding.name}</span>
-                    <span class="text-[10px] tracking-[0.3em] font-semibold text-[#C5A572] uppercase">${settings.branding.subTitle}</span>
-                  </div>
-                </div>
-
-                ${settings.taglines?.showInFooter !== false ? `
-                  <div class="text-center md:text-right space-y-1">
-                    <h3 class="font-serif text-lg sm:text-xl text-white font-light tracking-wide">${primaryTagline}</h3>
-                    <h3 class="font-serif text-lg sm:text-xl text-[#C5A572] font-medium tracking-wide">${secondaryTagline}</h3>
-                  </div>
-                ` : ''}
-              </div>
-
-              <div class="flex flex-wrap items-center justify-between gap-4 text-xs text-neutral-300">
-                <div class="flex flex-wrap items-center gap-4">
-                  <a href="https://wa.me/${settings.contact.whatsappRaw}" target="_blank" class="hover:text-[#C5A572]">WhatsApp</a>
-                  <a href="tel:${settings.contact.phoneRaw}" class="hover:text-[#C5A572]">Call Us</a>
-                  <a href="${settings.social.instagram}" target="_blank" class="hover:text-[#C5A572]">Instagram</a>
-                  <a href="mailto:${settings.contact.email}" class="hover:text-[#C5A572]">Email</a>
-                </div>
-              </div>
-
-              <div class="pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-neutral-400">
-                <p>© ${new Date().getFullYear()} ${settings.branding.name} ${settings.branding.subTitle}. All Rights Reserved.</p>
-                <p>Aziznagar Studio • Hyderabad, Telangana</p>
-              </div>
-            </div>
-          </footer>
+          <div class="pb-8 sm:pb-10"></div>
+        </div>
 
         </div>
 

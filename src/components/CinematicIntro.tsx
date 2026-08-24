@@ -142,7 +142,23 @@ export const CinematicIntro: React.FC<CinematicIntroProps> = ({ onComplete }) =>
             ESPACIO
           </motion.h1>
 
-          {/* Secondary Title: INTERIORS AND MODULARS */}
+          {/* Gold Accent Divider Bar with Center Square */}
+          <motion.div
+            initial={{ scaleX: 0, opacity: 0 }}
+            animate={
+              phase === 'reveal' || phase === 'transition'
+                ? { scaleX: 1, opacity: 1 }
+                : { scaleX: 0, opacity: 0 }
+            }
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="flex items-center justify-center gap-2 w-28 my-1"
+          >
+            <span className="flex-1 h-[1.5px] bg-[#C5A572]" />
+            <span className="w-1.5 h-1.5 bg-[#C5A572]" />
+            <span className="flex-1 h-[1.5px] bg-[#C5A572]" />
+          </motion.div>
+
+          {/* Secondary Title: INTERIORS AND MODULAR */}
           <motion.p
             initial={{ opacity: 0, y: 16, filter: 'blur(8px)' }}
             animate={
@@ -150,23 +166,11 @@ export const CinematicIntro: React.FC<CinematicIntroProps> = ({ onComplete }) =>
                 ? { opacity: 0.9, y: 0, filter: 'blur(0px)' }
                 : { opacity: 0, y: 16, filter: 'blur(8px)' }
             }
-            transition={{ duration: 0.8, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
-            className="text-[11px] sm:text-xs font-semibold text-luxury-gold tracking-[0.3em] pl-[0.3em] uppercase"
+            transition={{ duration: 0.8, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            className="text-[10px] sm:text-xs font-semibold text-neutral-300 tracking-[0.32em] pl-[0.32em] uppercase"
           >
-            INTERIORS AND MODULARS
+            INTERIORS AND MODULAR
           </motion.p>
-
-          {/* Tagline Divider */}
-          <motion.div
-            initial={{ scaleX: 0, opacity: 0 }}
-            animate={
-              phase === 'reveal' || phase === 'transition'
-                ? { scaleX: 1, opacity: 0.4 }
-                : { scaleX: 0, opacity: 0 }
-            }
-            transition={{ duration: 0.7, delay: 0.3 }}
-            className="w-16 h-[1px] bg-gradient-to-r from-transparent via-luxury-gold to-transparent my-1"
-          />
 
           {/* Brand Tagline: Designing Spaces, Defining Lifestyles */}
           <motion.p

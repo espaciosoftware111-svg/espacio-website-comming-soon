@@ -33,11 +33,11 @@ export const Footer: React.FC<FooterProps> = ({ onReplayIntro }) => {
                 <EspacioMonogram size={26} variant="silver" />
               </div>
               <div className="flex flex-col">
-                <span className="font-serif text-lg font-light tracking-[0.22em] text-white">
+                <span className="font-sans text-lg font-bold tracking-[0.24em] text-white">
                   ESPACIO
                 </span>
                 <span className="text-[9px] tracking-[0.28em] font-semibold text-luxury-gold uppercase">
-                  INTERIORS AND MODULARS
+                  INTERIORS AND MODULAR
                 </span>
               </div>
             </div>
@@ -126,7 +126,7 @@ export const Footer: React.FC<FooterProps> = ({ onReplayIntro }) => {
 
         {/* Bottom Copyright Strip */}
         <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-400">
-          <p>© {currentYear} ESPACIO INTERIORS AND MODULARS. All Rights Reserved.</p>
+          <p>© {currentYear} ESPACIO INTERIORS AND MODULAR. All Rights Reserved.</p>
           <div className="flex items-center gap-4 text-[11px]">
             <span>Hyderabad, Telangana</span>
             <span>•</span>

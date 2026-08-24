@@ -77,7 +77,7 @@ export const App: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#08090C] text-white">
+    <div className="min-h-screen w-full max-w-[100vw] overflow-x-hidden bg-[#08090C] text-white relative">
       <AnimatePresence mode="wait">
         {showIntro && settings.animations.enableIntroAnimation ? (
           <ExactLogoAnimation

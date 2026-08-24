@@ -2,7 +2,7 @@ import { StudioInfo, LaunchMilestone } from '../types';
 
 export const BRAND_DETAILS: StudioInfo = {
   name: 'ESPACIO',
-  brand: 'ESPACIO INTERIORS AND MODULARS',
+  brand: 'ESPACIO INTERIORS AND MODULAR',
   tagline: 'Designing Spaces, Defining Lifestyles',
   experienceStudioAddress: '1st floor, H.No. 6-63/14B, Moinabad Road, Aziznagar',
   cityStateZip: 'Hyderabad, Telangana 500075',

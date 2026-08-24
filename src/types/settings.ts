@@ -114,7 +114,7 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
   status: 'COMING_SOON',
   branding: {
     name: 'ESPACIO',
-    subTitle: 'INTERIORS AND MODULARS',
+    subTitle: 'INTERIORS AND MODULAR',
     tagline1: 'Designing Spaces',
     tagline2: 'Defining Lifestyles',
     estdText: 'ESTD. HYDERABAD',
@@ -129,8 +129,8 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
     showInFooter: true,
   },
   hero: {
-    mainHeading: 'WEBSITE LAUNCHING SOON',
-    description: 'Crafting thoughtfully designed interiors and modular spaces that bring functionality, elegance, and individuality together.',
+    mainHeading: "WE'RE GETTING BETTER FOR YOU",
+    description: "We’re making a few improvements behind the scenes to bring you a better experience.",
     launchBadgeText: 'SYSTEM UPGRADE & LAUNCH IN PROGRESS',
     showBadge: true,
   },
@@ -169,7 +169,7 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
       { title: 'Turnkey Luxury Interiors', desc: 'End-to-end villa & apartment execution with bespoke craftsmanship.' },
       { title: 'Modular Kitchens & Systems', desc: 'German & Italian precision fittings with motorized soft-close runners.' },
       { title: 'Curated Materials Vault', desc: 'Imported Italian marble, fluted natural veneers, and bronze glass.' },
-      { title: 'Custom Wardrobes & Vanities', desc: 'Walk-in dressing suites with integrated LED lighting and leather accents.' },
+      { title: 'Commercial & Corporate Spaces', desc: 'Executive workspaces, boutique retail environments, and luxury commercial architecture.' },
     ],
   },
   buttons: [

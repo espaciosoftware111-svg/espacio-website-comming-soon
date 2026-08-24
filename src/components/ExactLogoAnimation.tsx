@@ -180,11 +180,11 @@ export const ExactLogoAnimation: React.FC<ExactLogoAnimationProps> = ({
               <line
                 x1="14"
                 y1="14"
-                x2="42"
+                x2="44"
                 y2="14"
                 stroke="#FFFFFF"
-                strokeWidth="2.4"
-                strokeLinecap="round"
+                strokeWidth="3.2"
+                strokeLinecap="square"
                 style={{
                   strokeDasharray: '30',
                   strokeDashoffset: (1 - Math.min(1, (elapsedTime - 0.6) / 0.35)) * 30,
@@ -192,7 +192,7 @@ export const ExactLogoAnimation: React.FC<ExactLogoAnimationProps> = ({
               />
             )}
 
-            {/* 2. Upper-Right Horizontal Line (With clear open gap from X=42 to X=54) */}
+            {/* 2. Upper-Right Horizontal Line (With clear open gap from X=44 to X=54) */}
             {elapsedTime >= 0.8 && (
               <line
                 x1="54"
@@ -200,8 +200,8 @@ export const ExactLogoAnimation: React.FC<ExactLogoAnimationProps> = ({
                 x2="86"
                 y2="14"
                 stroke="#FFFFFF"
-                strokeWidth="2.4"
-                strokeLinecap="round"
+                strokeWidth="3.2"
+                strokeLinecap="square"
                 style={{
                   strokeDasharray: '32',
                   strokeDashoffset: (1 - Math.min(1, (elapsedTime - 0.8) / 0.35)) * 32,
@@ -217,8 +217,8 @@ export const ExactLogoAnimation: React.FC<ExactLogoAnimationProps> = ({
                 x2="86"
                 y2="86"
                 stroke="#FFFFFF"
-                strokeWidth="2.4"
-                strokeLinecap="round"
+                strokeWidth="3.2"
+                strokeLinecap="square"
                 style={{
                   strokeDasharray: '72',
                   strokeDashoffset: (1 - Math.min(1, (elapsedTime - 1.2) / 0.35)) * 72,
@@ -234,8 +234,8 @@ export const ExactLogoAnimation: React.FC<ExactLogoAnimationProps> = ({
                 x2="14"
                 y2="86"
                 stroke="#FFFFFF"
-                strokeWidth="2.4"
-                strokeLinecap="round"
+                strokeWidth="3.2"
+                strokeLinecap="square"
                 style={{
                   strokeDasharray: '72',
                   strokeDashoffset: (1 - Math.min(1, (elapsedTime - 1.55) / 0.35)) * 72,
@@ -243,38 +243,38 @@ export const ExactLogoAnimation: React.FC<ExactLogoAnimationProps> = ({
               />
             )}
 
-            {/* 5. Left Vertical Line (STOPS AT Y=50, PRESERVING OPEN TOP-LEFT CORNER!) */}
+            {/* 5. Left Vertical Line (STOPS AT Y=48, PRESERVING OPEN TOP-LEFT CORNER!) */}
             {elapsedTime >= 1.9 && (
               <line
                 x1="14"
                 y1="86"
                 x2="14"
-                y2="50"
+                y2="48"
                 stroke="#FFFFFF"
-                strokeWidth="2.4"
-                strokeLinecap="round"
+                strokeWidth="3.2"
+                strokeLinecap="square"
                 style={{
-                  strokeDasharray: '36',
-                  strokeDashoffset: (1 - Math.min(1, (elapsedTime - 1.9) / 0.35)) * 36,
+                  strokeDasharray: '38',
+                  strokeDashoffset: (1 - Math.min(1, (elapsedTime - 1.9) / 0.35)) * 38,
                 }}
               />
             )}
 
-            {/* 6. Geometric Sans-Serif 'E' in Lower-Right Quadrant WITH GAPS (Snaps in faster at 2.3s) */}
+            {/* 6. Geometric Sans-Serif 'E' in Lower-Right Quadrant */}
             {elapsedTime >= 2.3 && (
               <g
                 style={{
                   opacity: Math.min(1, (elapsedTime - 2.3) / 0.45),
                   transform: `scale(${0.94 + 0.06 * Math.min(1, (elapsedTime - 2.3) / 0.45)})`,
-                  transformOrigin: '67px 62px',
+                  transformOrigin: '67px 61px',
                 }}
               >
                 {/* E Spine */}
-                <line x1="58" y1="46" x2="58" y2="78" stroke="#FFFFFF" strokeWidth="4.8" strokeLinecap="square" />
+                <line x1="58" y1="44" x2="58" y2="78" stroke="#FFFFFF" strokeWidth="4.8" strokeLinecap="square" />
                 {/* E Top arm */}
-                <line x1="58" y1="46" x2="76" y2="46" stroke="#FFFFFF" strokeWidth="4.8" strokeLinecap="square" />
+                <line x1="58" y1="44" x2="76" y2="44" stroke="#FFFFFF" strokeWidth="4.8" strokeLinecap="square" />
                 {/* E Middle arm */}
-                <line x1="58" y1="62" x2="72" y2="62" stroke="#FFFFFF" strokeWidth="4.2" strokeLinecap="square" />
+                <line x1="58" y1="61" x2="72" y2="61" stroke="#FFFFFF" strokeWidth="4.2" strokeLinecap="square" />
                 {/* E Bottom arm */}
                 <line x1="58" y1="78" x2="76" y2="78" stroke="#FFFFFF" strokeWidth="4.8" strokeLinecap="square" />
               </g>
@@ -289,18 +289,17 @@ export const ExactLogoAnimation: React.FC<ExactLogoAnimationProps> = ({
                 }}
               >
                 {/* Stem */}
-                <line x1="28" y1="14" x2="28" y2="28" stroke="#FFFFFF" strokeWidth="2.0" strokeLinecap="round" />
-                {/* Connector */}
-                <circle cx="28" cy="28" r="1.5" fill="#FFFFFF" />
+                <line x1="29" y1="14" x2="29" y2="28" stroke="#FFFFFF" strokeWidth="2.4" strokeLinecap="round" />
                 {/* Trapezoidal Lampshade */}
-                <polygon points="25,29 31,29 36,42 20,42" fill="#FFFFFF" stroke="#FFFFFF" strokeWidth="0.8" strokeLinejoin="round" />
+                <polygon points="25.5,28 32.5,28 38,42 20,42" fill="#FFFFFF" stroke="#FFFFFF" strokeWidth="0.8" strokeLinejoin="round" />
 
                 {/* Light Glow Activation (at 3.8s) */}
                 {elapsedTime >= 3.8 && (
                   <g style={{ opacity: Math.min(1, (elapsedTime - 3.8) / 0.35) }}>
-                    <polygon points="20,42 36,42 46,78 10,78" fill="url(#lightConeMaster)" opacity="0.9" />
-                    <ellipse cx="28" cy="42" rx="5" ry="1.2" fill="#FFFBEA" />
-                    <circle cx="28" cy="43" r="3" fill="#FFEAA7" opacity="0.9" />
+                    <ellipse cx="29" cy="46" rx="14" ry="10" fill="url(#lightConeMaster)" opacity="0.9" />
+                    <polygon points="20,42 38,42 48,68 10,68" fill="url(#lightConeMaster)" opacity="0.85" />
+                    <ellipse cx="29" cy="42" rx="7" ry="1.6" fill="#FFFCE6" />
+                    <circle cx="29" cy="42.5" r="2.8" fill="#FFEAA7" opacity="0.95" />
                   </g>
                 )}
               </g>
@@ -317,18 +316,33 @@ export const ExactLogoAnimation: React.FC<ExactLogoAnimationProps> = ({
               transform: `translate3d(0, ${Math.max(0, (1 - (elapsedTime - 4.6) / 0.5) * 14)}px, 0)`,
             }}
           >
-            <h1 className="font-sans text-3xl sm:text-4xl md:text-5xl font-light text-white tracking-[0.25em] pl-[0.25em] leading-tight">
+            <h1 className="font-sans text-3xl sm:text-4xl md:text-5xl font-medium text-white tracking-[0.32em] pl-[0.32em] leading-tight">
               {settings.branding.name}
             </h1>
 
+            {/* Gold Accent Divider Bar with Square Dot (─────── ▪ ───────) */}
+            {elapsedTime >= 4.8 && (
+              <div
+                className="flex items-center justify-center gap-2 max-w-[220px] mx-auto my-1.5"
+                style={{
+                  opacity: Math.min(1, (elapsedTime - 4.8) / 0.35),
+                  transform: `scaleX(${Math.min(1, (elapsedTime - 4.8) / 0.35)})`,
+                }}
+              >
+                <div className="flex-1 h-[1.5px] bg-[#C5A572]" />
+                <div className="w-1.5 h-1.5 bg-[#C5A572]" />
+                <div className="flex-1 h-[1.5px] bg-[#C5A572]" />
+              </div>
+            )}
+
             {elapsedTime >= 4.9 && (
               <p
-                className="text-[11px] sm:text-xs font-semibold text-luxury-gold tracking-[0.3em] pl-[0.3em] uppercase pt-0.5"
+                className="text-[10px] sm:text-xs font-semibold text-neutral-300 tracking-[0.32em] pl-[0.32em] uppercase pt-0.5"
                 style={{
                   opacity: Math.min(1, (elapsedTime - 4.9) / 0.35),
                 }}
               >
-                {settings.branding.subTitle}
+                {settings.branding.subTitle || 'INTERIORS AND MODULAR'}
               </p>
             )}
 

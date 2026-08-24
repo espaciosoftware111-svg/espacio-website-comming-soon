@@ -160,14 +160,22 @@ export const Plaque3D: React.FC<Plaque3DProps> = ({ className = '' }) => {
 
             {/* Plaque Typography with Metallic Foil Reflections */}
             <div className="mt-5 text-center flex flex-col items-center">
-              <h2 className="font-serif text-2xl sm:text-3xl tracking-[0.28em] pl-[0.28em] font-light bg-gradient-to-b from-white via-neutral-200 to-neutral-400 bg-clip-text text-transparent drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">
+              <h2 className="font-sans text-2xl sm:text-3xl tracking-[0.32em] pl-[0.32em] font-medium bg-gradient-to-b from-white via-neutral-200 to-neutral-400 bg-clip-text text-transparent drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">
                 ESPACIO
               </h2>
-              <p className="mt-1 text-[10px] tracking-[0.32em] pl-[0.32em] uppercase font-semibold text-luxury-gold drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
-                INTERIORS AND MODULARS
+
+              {/* Gold Accent Divider Bar with Center Square */}
+              <div className="flex items-center justify-center gap-2 w-32 my-2.5">
+                <span className="flex-1 h-[1.5px] bg-[#C5A572] shadow-[0_0_8px_rgba(197,165,114,0.6)]" />
+                <span className="w-1.5 h-1.5 bg-[#C5A572] shadow-[0_0_8px_rgba(197,165,114,0.8)]" />
+                <span className="flex-1 h-[1.5px] bg-[#C5A572] shadow-[0_0_8px_rgba(197,165,114,0.6)]" />
+              </div>
+
+              <p className="text-[10px] tracking-[0.32em] pl-[0.32em] uppercase font-semibold text-neutral-300 drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
+                INTERIORS AND MODULAR
               </p>
               
-              <div className="w-12 h-[1px] bg-gradient-to-r from-transparent via-luxury-gold/60 to-transparent my-2" />
+              <div className="w-12 h-[1px] bg-gradient-to-r from-transparent via-luxury-gold/40 to-transparent my-2" />
               
               <p className="font-editorial italic text-xs tracking-wider text-neutral-300">
                 Designing Spaces, Defining Lifestyles
