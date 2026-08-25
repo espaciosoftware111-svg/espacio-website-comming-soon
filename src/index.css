@@ -52,11 +52,8 @@
 .animate-marquee-right-to-left {
   display: flex;
   width: max-content;
-  animation: marqueeScroll 22s linear infinite;
-}
-
-.animate-marquee-right-to-left:hover {
-  animation-play-state: paused;
+  animation: marqueeScroll 22s linear infinite !important;
+  animation-play-state: running !important;
 }
 
 @keyframes lampSwing {

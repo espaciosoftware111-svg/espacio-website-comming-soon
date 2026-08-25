@@ -164,7 +164,7 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
   },
   modularDescription: {
     heading: 'Designed for the way you live.',
-    body: 'ESPACIO Interiors & Modulars creates refined interior spaces, modular kitchens, wardrobes, furniture and customized solutions designed around modern lifestyles.',
+    body: 'ESPACIO Interiors & Modular We create refined interiors where contemporary design, thoughtful detailing, and understated luxury come together crafted to make every space feel distinctly yours.',
     features: [
       { title: 'Turnkey Luxury Interiors', desc: 'End-to-end villa & apartment execution with bespoke craftsmanship.' },
       { title: 'Modular Kitchens & Systems', desc: 'German & Italian precision fittings with motorized soft-close runners.' },

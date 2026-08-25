@@ -1,4 +1,5 @@
 import React from 'react';
+import exactPlaqueImg from '../assets/espacio-logo-plaque.png';
 
 export interface EspacioMonogramProps {
   size?: number | string;
@@ -8,6 +9,10 @@ export interface EspacioMonogramProps {
   className?: string;
   glow?: boolean;
   showWordmark?: boolean;
+  tightFit?: boolean;
+  showFill?: boolean;
+  fillColor?: string;
+  useImage?: boolean;
 }
 
 export const EspacioMonogram: React.FC<EspacioMonogramProps> = ({
@@ -17,8 +22,13 @@ export const EspacioMonogram: React.FC<EspacioMonogramProps> = ({
   className = '',
   glow = false,
   showWordmark = false,
+  tightFit = true,
+  showFill = false,
+  fillColor = '#F7F1E9',
+  useImage = false,
 }) => {
   const isDarkTheme = variant === 'dark' || variant === 'black';
+  const viewBox = tightFit ? '10 6 80 84' : '0 0 100 100';
 
   const primaryColor =
     variant === 'gold'
@@ -56,94 +66,113 @@ export const EspacioMonogram: React.FC<EspacioMonogramProps> = ({
           />
         )}
 
-        <svg
-          viewBox="0 0 100 100"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-full h-full overflow-visible"
-          style={
-            isDarkTheme
-              ? { filter: 'drop-shadow(0 2px 3px rgba(0,0,0,0.35))' }
-              : { filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.25))' }
-          }
-        >
-          <defs>
-            {/* Warm Ambient Lamp Glow Gradient */}
-            <radialGradient id="lampWarmGlow" cx="50%" cy="0%" r="90%">
-              <stop offset="0%" stopColor="#FFF4D0" stopOpacity="0.95" />
-              <stop offset="35%" stopColor="#DFC28D" stopOpacity="0.6" />
-              <stop offset="70%" stopColor="#C5A572" stopOpacity="0.2" />
-              <stop offset="100%" stopColor="#C5A572" stopOpacity="0" />
-            </radialGradient>
-          </defs>
-
-          {/* 1. Upper-Left Horizontal Line (Lamp Top Bar) */}
-          <line
-            x1="14"
-            y1="14"
-            x2="44"
-            y2="14"
-            stroke={primaryColor}
-            strokeWidth="3.2"
-            strokeLinecap="square"
+        {useImage ? (
+          <img
+            src={exactPlaqueImg || './espacio-logo-plaque.png'}
+            alt="ESPACIO Architectural Emblem"
+            className="w-full h-full object-contain rounded-xl drop-shadow-md"
           />
+        ) : (
+          <svg
+            viewBox={viewBox}
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-full h-full overflow-visible"
+            style={
+              isDarkTheme
+                ? { filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))' }
+                : { filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.25))' }
+            }
+          >
+            <defs>
+              {/* Warm Ambient Lamp Glow Gradient */}
+              <radialGradient id="lampWarmGlow" cx="50%" cy="0%" r="90%">
+                <stop offset="0%" stopColor="#FFF4D0" stopOpacity="0.95" />
+                <stop offset="35%" stopColor="#DFC28D" stopOpacity="0.6" />
+                <stop offset="70%" stopColor="#C5A572" stopOpacity="0.2" />
+                <stop offset="100%" stopColor="#C5A572" stopOpacity="0" />
+              </radialGradient>
+            </defs>
 
-          {/* 2. Upper-Right Horizontal Line (With clear open gap from X=44 to X=54) */}
-          <line
-            x1="54"
-            y1="14"
-            x2="86"
-            y2="14"
-            stroke={primaryColor}
-            strokeWidth="3.2"
-            strokeLinecap="square"
-          />
+            {/* 0. Optional Background Fill (Only when explicitly enabled) */}
+            {showFill && (
+              <rect
+                x="2"
+                y="2"
+                width="96"
+                height="96"
+                rx="14"
+                fill={fillColor || '#F7F1E9'}
+              />
+            )}
 
-          {/* 3. Right Vertical Line */}
-          <line
-            x1="86"
-            y1="14"
-            x2="86"
-            y2="86"
-            stroke={primaryColor}
-            strokeWidth="3.2"
-            strokeLinecap="square"
-          />
-
-          {/* 4. Bottom Horizontal Line */}
-          <line
-            x1="86"
-            y1="86"
-            x2="14"
-            y2="86"
-            stroke={primaryColor}
-            strokeWidth="3.2"
-            strokeLinecap="square"
-          />
-
-          {/* 5. Left Vertical Line (STOPS AT Y=48, PRESERVING OPEN TOP-LEFT CORNER!) */}
-          <line
-            x1="14"
-            y1="86"
-            x2="14"
-            y2="48"
-            stroke={primaryColor}
-            strokeWidth="3.2"
-            strokeLinecap="square"
-          />
-
-          {/* 6. Pendant Lamp (Top-Left Architectural Motif) */}
-          <g id="monogram-pendant-lamp">
-            {/* Stem dropping from center of upper-left bar (x=29) */}
+            {/* 1. Upper-Left Horizontal Line (Lamp Top Bar) */}
             <line
-              x1="29"
+              x1="14"
               y1="14"
-              x2="29"
-              y2="28"
+              x2="44"
+              y2="14"
               stroke={primaryColor}
-              strokeWidth="2.4"
-              strokeLinecap="round"
+              strokeWidth="3.2"
+              strokeLinecap="square"
             />
+
+            {/* 2. Upper-Right Horizontal Line (With clear open gap from X=44 to X=54) */}
+            <line
+              x1="54"
+              y1="14"
+              x2="86"
+              y2="14"
+              stroke={primaryColor}
+              strokeWidth="3.2"
+              strokeLinecap="square"
+            />
+
+            {/* 3. Right Vertical Line */}
+            <line
+              x1="86"
+              y1="14"
+              x2="86"
+              y2="86"
+              stroke={primaryColor}
+              strokeWidth="3.2"
+              strokeLinecap="square"
+            />
+
+            {/* 4. Bottom Horizontal Line */}
+            <line
+              x1="86"
+              y1="86"
+              x2="14"
+              y2="86"
+              stroke={primaryColor}
+              strokeWidth="3.2"
+              strokeLinecap="square"
+            />
+
+            {/* 5. Left Vertical Line (STOPS AT Y=48, PRESERVING OPEN TOP-LEFT CORNER!) */}
+            <line
+              x1="14"
+              y1="86"
+              x2="14"
+              y2="48"
+              stroke={primaryColor}
+              strokeWidth="3.2"
+              strokeLinecap="square"
+            />
+
+            {/* 6. Pendant Lamp (Top-Left Architectural Motif) */}
+            <g id="monogram-pendant-lamp">
+              {/* Pendant Stem dropping from horizontal top line (x=29, y=14 to y=28) */}
+              <line
+                x1="29"
+                y1="14"
+                x2="29"
+                y2="28"
+                stroke={primaryColor}
+                strokeWidth="3.2"
+                strokeLinecap="square"
+              />
             
             {/* Geometric Conical/Trapezoidal Lampshade */}
             <polygon
@@ -223,6 +252,7 @@ export const EspacioMonogram: React.FC<EspacioMonogramProps> = ({
             />
           </g>
         </svg>
+        )}
       </div>
 
       {/* Optional Full Wordmark Lockup Below Monogram */}

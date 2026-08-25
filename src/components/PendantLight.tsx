@@ -26,7 +26,7 @@ export const PendantLight: React.FC<PendantLightProps> = ({ className = '' }) =>
         }}
       />
 
-      {/* Animated Swinging Lamp Assembly with shortened rope (lamp pulled high up) */}
+      {/* Animated Swinging Lamp Assembly with cable length reduced by exactly 11% */}
       <motion.div
         animate={{
           rotate: [-3.5, 3.5, -3.5],
@@ -37,7 +37,7 @@ export const PendantLight: React.FC<PendantLightProps> = ({ className = '' }) =>
           ease: 'easeInOut',
         }}
         style={{ transformOrigin: '50% 0%' }}
-        className="relative flex flex-col items-center -mt-14 xs:-mt-16 sm:-mt-22 md:-mt-26"
+        className="relative flex flex-col items-center -mt-18 xs:-mt-21 sm:-mt-28 md:-mt-33"
       >
         <img
           src="https://res.cloudinary.com/dkp6jeboz/image/upload/v1787583775/ChatGPT_Image_Aug_24_2026_04_31_24_PM_3_ycieeq.png"

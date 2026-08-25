@@ -43,6 +43,11 @@ export const getSiteSettings = (): SiteSettings => {
     if (settings.branding?.subTitle) {
       settings.branding.subTitle = settings.branding.subTitle.replace('MODULARS', 'MODULAR');
     }
+    if (settings.modularDescription) {
+      if (!settings.modularDescription.body || settings.modularDescription.body.includes('creates refined interior spaces')) {
+        settings.modularDescription.body = DEFAULT_SITE_SETTINGS.modularDescription.body;
+      }
+    }
     return settings;
   } catch {
     return DEFAULT_SITE_SETTINGS;
@@ -59,6 +64,11 @@ export const getDraftSettings = (): SiteSettings => {
     const settings = { ...DEFAULT_SITE_SETTINGS, ...JSON.parse(raw) };
     if (settings.branding?.subTitle) {
       settings.branding.subTitle = settings.branding.subTitle.replace('MODULARS', 'MODULAR');
+    }
+    if (settings.modularDescription) {
+      if (!settings.modularDescription.body || settings.modularDescription.body.includes('creates refined interior spaces')) {
+        settings.modularDescription.body = DEFAULT_SITE_SETTINGS.modularDescription.body;
+      }
     }
     return settings;
   } catch {
