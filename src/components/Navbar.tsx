@@ -33,29 +33,31 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenStaffModal }) => {
   return (
     <header className="sticky top-0 z-40 w-full backdrop-blur-md bg-transparent transition-all">
       <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-10 h-20 flex items-center justify-between">
-        {/* Left: Brand Monogram & Title - Soft Localized Fog Glow Lockup */}
-        <div className="relative flex items-center gap-2.5 sm:gap-3.5 lg:gap-4 select-none px-2 py-1">
+        {/* Left: Brand Monogram & Title - Perfectly Proportioned & Aligned Lockup */}
+        <div className="relative flex items-center gap-3 sm:gap-4 lg:gap-4.5 select-none px-2 py-1">
           {/* Soft, Feathered Cream/White Fog Glow centered behind LOGO + TEXT ONLY */}
           <div
-            className="absolute -inset-4 sm:-inset-6 md:-inset-8 rounded-full pointer-events-none -z-10 filter blur-xl opacity-95"
+            className="absolute -inset-5 sm:-inset-7 md:-inset-9 rounded-full pointer-events-none -z-10 filter blur-xl opacity-95"
             style={{
               background:
-                'radial-gradient(ellipse at 40% 50%, rgba(250, 244, 237, 0.98) 0%, rgba(250, 244, 237, 0.85) 40%, rgba(250, 244, 237, 0.4) 75%, transparent 100%)',
+                'radial-gradient(ellipse at 42% 50%, rgba(250, 244, 237, 0.98) 0%, rgba(250, 244, 237, 0.85) 42%, rgba(250, 244, 237, 0.4) 75%, transparent 100%)',
             }}
           />
-          <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-14 lg:h-14 xl:w-16 xl:h-16 flex items-center justify-center transition-transform hover:scale-105 shrink-0">
+          {/* Monogram Emblem (Balanced Proportional Sizing) */}
+          <div className="w-8 h-8 sm:w-11 sm:h-11 lg:w-13 lg:h-13 xl:w-15 xl:h-15 flex items-center justify-center transition-transform hover:scale-105 shrink-0">
             <EspacioMonogram size="100%" className="w-full h-full" variant="dark" isLightOn={true} glow={true} tightFit={true} useImage={false} />
           </div>
-          <div className="flex flex-col justify-center min-w-0 sm:min-w-[130px] lg:min-w-[185px]">
-            <span className="font-sans text-sm sm:text-base md:text-xl lg:text-2xl xl:text-[25px] font-bold tracking-[0.24em] lg:tracking-[0.28em] text-[#08090C] leading-none">
+          {/* Typography Lockup */}
+          <div className="flex flex-col justify-center min-w-0 sm:min-w-[140px] lg:min-w-[195px]">
+            <span className="font-sans text-[13px] sm:text-lg md:text-2xl lg:text-[26px] xl:text-[28px] font-bold tracking-[0.24em] lg:tracking-[0.28em] text-[#08090C] leading-none">
               ESPACIO
             </span>
-            <div className="hidden sm:flex items-center gap-1.5 sm:gap-2 my-0.5 sm:my-1 lg:my-1.5 w-full">
-              <span className="flex-1 h-[1.5px] bg-[#C5A572] rounded-full" />
+            <div className="flex items-center gap-1 sm:gap-1.5 lg:gap-2 my-0.5 sm:my-1 lg:my-1.5 w-full">
+              <span className="flex-1 h-[1.2px] sm:h-[1.5px] bg-[#C5A572] rounded-full" />
               <span className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-[#C5A572] rotate-45 shrink-0" />
-              <span className="flex-1 h-[1.5px] bg-[#C5A572] rounded-full" />
+              <span className="flex-1 h-[1.2px] sm:h-[1.5px] bg-[#C5A572] rounded-full" />
             </div>
-            <span className="hidden sm:inline-block text-[6.5px] sm:text-[8.5px] md:text-[9.5px] lg:text-[10.5px] tracking-[0.26em] sm:tracking-[0.32em] font-bold text-[#121316] uppercase leading-none">
+            <span className="block text-[6.8px] sm:text-[9px] md:text-[10px] lg:text-[11.5px] tracking-[0.24em] sm:tracking-[0.32em] font-bold text-[#121316] uppercase leading-none">
               INTERIORS AND MODULAR
             </span>
           </div>

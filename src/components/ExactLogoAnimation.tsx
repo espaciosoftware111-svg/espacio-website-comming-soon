@@ -379,12 +379,6 @@ export const ExactLogoAnimation: React.FC<ExactLogoAnimationProps> = ({
           </div>
         )}
       </div>
-
-      {/* Bottom Status Ticker */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2 text-[10px] tracking-widest text-neutral-500 font-mono">
-        <span className="w-1.5 h-1.5 rounded-full bg-luxury-gold animate-ping" />
-        <span>ESPACIO ARCHITECTURAL EMBLEM • {elapsedTime.toFixed(1)}s</span>
-      </div>
     </motion.div>
   );
 };
