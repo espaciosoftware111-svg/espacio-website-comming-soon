@@ -163,13 +163,12 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
     linkedin: 'https://linkedin.com/company/espacio-interiors',
   },
   modularDescription: {
-    heading: 'Designed for the way you live.',
+    heading: 'DESIGNED FOR THE WAY YOU LIVE.',
     body: 'ESPACIO Interiors & Modular We create refined interiors where contemporary design, thoughtful detailing, and understated luxury come together crafted to make every space feel distinctly yours.',
     features: [
-      { title: 'Turnkey Luxury Interiors', desc: 'End-to-end villa & apartment execution with bespoke craftsmanship.' },
-      { title: 'Modular Kitchens & Systems', desc: 'German & Italian precision fittings with motorized soft-close runners.' },
-      { title: 'Curated Materials Vault', desc: 'Imported Italian marble, fluted natural veneers, and bronze glass.' },
-      { title: 'Commercial & Corporate Spaces', desc: 'Executive workspaces, boutique retail environments, and luxury commercial architecture.' },
+      { title: 'SMART KITCHENS & SYSTEMS', desc: 'Intelligent layouts and seamless storage that make everyday living effortless.' },
+      { title: 'CURATED MATERIALS VAULT', desc: 'Handpicked premium materials that bring texture, durability, and timeless elegance.' },
+      { title: 'COMMERCIAL & CORPORATE SPACES', desc: 'Sophisticated environments designed to inspire productivity and leave a lasting impression.' },
     ],
   },
   buttons: [

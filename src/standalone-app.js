@@ -32,7 +32,7 @@
     },
     hero: {
       mainHeading: "WE'RE GETTING BETTER FOR YOU",
-      description: "We’re making a few improvements behind the scenes to bring you a better experience.",
+      description: "We create refined interiors where contemporary design, thoughtful detailing, and understated luxury come together crafted to make every space feel distinctly yours.",
       launchBadgeText: 'SYSTEM UPGRADE & LAUNCH IN PROGRESS',
       showBadge: true,
     },
@@ -413,46 +413,48 @@
           </header>
 
           <!-- Main Body Content -->
-          <main class="relative z-20 flex-1 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6 md:pt-8 pb-3 sm:pb-5 flex flex-col justify-center gap-4 sm:gap-6 overflow-hidden">
+          <main class="relative z-20 flex-1 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-1 sm:pt-2 lg:pt-3 pb-2 sm:pb-3 lg:pb-4 flex flex-col justify-center gap-2.5 sm:gap-3.5 lg:gap-4 overflow-hidden">
             
             <!-- Hero Section -->
-            <section class="text-center space-y-2.5 sm:space-y-4 pt-1 w-full">
+            <section class="relative text-center space-y-1.5 sm:space-y-2.5 lg:space-y-3 pt-3 sm:pt-4 md:pt-5 lg:pt-6 w-full shrink-0">
+              <!-- 20% Subtle Premium Frosted Atmospheric Mist Overlay -->
+              <div class="absolute -inset-4 sm:-inset-8 max-w-3xl mx-auto rounded-3xl pointer-events-none -z-10 filter blur-2xl opacity-20" style="background: radial-gradient(ellipse at 50% 50%, rgba(247, 243, 236, 0.98) 0%, rgba(247, 243, 236, 0.85) 45%, rgba(238, 228, 213, 0.5) 75%, transparent 100%);"></div>
 
               ${settings.taglines?.showInHero !== false ? `
-                <div class="max-w-lg mx-auto py-0.5 px-2">
-                  <p class="font-serif italic font-bold text-base sm:text-xl md:text-2xl text-[#08090C] tracking-wide drop-shadow-[0_2px_12px_rgba(255,255,255,0.95)]">
-                    <span>&ldquo;${primaryTagline}</span>
-                    <span class="mx-1.5 sm:mx-2 text-[#9A7A48]">·</span>
-                    <span class="text-[#8A662E] font-bold">${secondaryTagline}&rdquo;</span>
+                <div class="w-full max-w-3xl mx-auto py-0 px-2 relative -top-3 sm:-top-10 md:-top-12 lg:-top-14 flex items-center justify-center">
+                  <p class="font-gulams font-black italic text-[11px] xs:text-[13px] sm:text-lg md:text-xl lg:text-[23px] tracking-wider uppercase whitespace-nowrap flex items-center justify-center gap-1 sm:gap-1.5">
+                    <span class="text-[#171717] font-black whitespace-nowrap" style="-webkit-text-stroke: 0.45px #171717;">${primaryTagline}</span>
+                    <span class="mx-1 sm:mx-1.5 text-[#C59B27] font-black whitespace-nowrap" style="-webkit-text-stroke: 0.45px #C59B27;">·</span>
+                    <span class="text-[#C59B27] font-black whitespace-nowrap" style="-webkit-text-stroke: 0.45px #C59B27;">${secondaryTagline}</span>
                   </p>
                 </div>
               ` : ''}
 
-              <h1 class="font-serif text-3xl sm:text-5xl md:text-6xl text-[#08090C] font-bold tracking-tight leading-[1.15] sm:leading-[1.12] max-w-3xl mx-auto px-2 drop-shadow-[0_3px_16px_rgba(255,255,255,0.95)]">
+              <h1 class="font-serif text-2xl sm:text-4xl md:text-5xl lg:text-[48px] text-[#171717] font-bold tracking-tight leading-[1.15] sm:leading-[1.12] max-w-3xl mx-auto px-2 relative top-0 sm:-top-5 md:-top-6 lg:-top-7">
                 ${settings.hero.mainHeading}
               </h1>
 
-              <p class="text-xs sm:text-base md:text-lg text-[#16171A] font-medium leading-relaxed max-w-2xl mx-auto px-2 sm:px-0 drop-shadow-[0_1px_8px_rgba(255,255,255,0.9)]">
+              <p class="text-sm sm:text-base md:text-lg lg:text-[18px] text-[#3F3A35] font-medium leading-relaxed max-w-2xl mx-auto px-2 sm:px-0">
                 ${settings.hero.description}
               </p>
 
-              <!-- 4 Action Buttons (2x2 Grid on Mobile / 1 Row on Laptop View) -->
-              <div class="pt-2 sm:pt-3 w-full max-w-lg md:max-w-3xl lg:max-w-4xl mx-auto">
-                <div class="grid grid-cols-2 md:flex md:flex-row md:flex-nowrap items-center justify-center gap-2 sm:gap-3 lg:gap-4 w-full">
-                  <a id="btn-action-wa" href="https://wa.me/${settings.contact.whatsappRaw}?text=${encodeURIComponent(settings.contact.whatsappDefaultMessage)}" target="_blank" class="min-h-[44px] sm:min-h-[48px] lg:min-h-[52px] w-full md:w-auto md:flex-1 lg:max-w-[220px] flex items-center justify-center gap-1.5 sm:gap-2.5 lg:gap-3 px-2.5 sm:px-4 lg:px-6 py-3 sm:py-3.5 rounded-xl sm:rounded-2xl font-bold text-[11px] sm:text-xs lg:text-sm tracking-wider uppercase bg-white/95 hover:bg-white border-2 border-[#D4C8B8] hover:border-[#8A662E] text-[#08090C] shadow-md transition-all active:scale-95">
-                    <svg class="w-4 h-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
+              <!-- 4 Contact Buttons -->
+              <div class="pt-1.5 sm:pt-2 w-full max-w-lg md:max-w-3xl lg:max-w-4xl mx-auto">
+                <div class="grid grid-cols-2 md:flex md:flex-row md:flex-nowrap items-center justify-center gap-2 sm:gap-3 lg:gap-3.5 w-full">
+                  <a id="btn-action-wa" href="https://wa.me/${settings.contact.whatsappRaw}?text=${encodeURIComponent(settings.contact.whatsappDefaultMessage)}" target="_blank" class="min-h-[40px] sm:min-h-[44px] lg:min-h-[46px] w-full md:w-auto md:flex-1 lg:max-w-[210px] flex items-center justify-center gap-1.5 sm:gap-2.5 lg:gap-3 px-2.5 sm:px-4 lg:px-5 py-2 sm:py-2.5 rounded-xl sm:rounded-2xl font-sans font-bold text-[11px] sm:text-[12px] lg:text-[12.5px] tracking-wider uppercase bg-[#F7F3EC]/95 hover:bg-white border border-[#E8DED0] hover:border-[#C59B27] text-[#171717] shadow-sm hover:shadow-md transition-all active:scale-95">
+                    <svg class="w-4 h-4 text-[#16a34a]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
                     <span class="truncate">WHATSAPP</span>
                   </a>
-                  <a id="btn-action-call" href="tel:${settings.contact.phoneRaw}" class="min-h-[44px] sm:min-h-[48px] lg:min-h-[52px] w-full md:w-auto md:flex-1 lg:max-w-[220px] flex items-center justify-center gap-1.5 sm:gap-2.5 lg:gap-3 px-2.5 sm:px-4 lg:px-6 py-3 sm:py-3.5 rounded-xl sm:rounded-2xl font-bold text-[11px] sm:text-xs lg:text-sm tracking-wider uppercase bg-white/95 hover:bg-white border-2 border-[#D4C8B8] hover:border-[#8A662E] text-[#08090C] shadow-md transition-all active:scale-95">
-                    <svg class="w-4 h-4 text-amber-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
+                  <a id="btn-action-call" href="tel:${settings.contact.phoneRaw}" class="min-h-[40px] sm:min-h-[44px] lg:min-h-[46px] w-full md:w-auto md:flex-1 lg:max-w-[210px] flex items-center justify-center gap-1.5 sm:gap-2.5 lg:gap-3 px-2.5 sm:px-4 lg:px-5 py-2 sm:py-2.5 rounded-xl sm:rounded-2xl font-sans font-bold text-[11px] sm:text-[12px] lg:text-[12.5px] tracking-wider uppercase bg-[#F7F3EC]/95 hover:bg-white border border-[#E8DED0] hover:border-[#C59B27] text-[#171717] shadow-sm hover:shadow-md transition-all active:scale-95">
+                    <svg class="w-4 h-4 text-[#C59B27]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
                     <span class="truncate">CALL US</span>
                   </a>
-                  <a id="btn-action-insta" href="${settings.social.instagram}" target="_blank" class="min-h-[44px] sm:min-h-[48px] lg:min-h-[52px] w-full md:w-auto md:flex-1 lg:max-w-[220px] flex items-center justify-center gap-1.5 sm:gap-2.5 lg:gap-3 px-2.5 sm:px-4 lg:px-6 py-3 sm:py-3.5 rounded-xl sm:rounded-2xl font-bold text-[11px] sm:text-xs lg:text-sm tracking-wider uppercase bg-white/95 hover:bg-white border-2 border-[#D4C8B8] hover:border-[#8A662E] text-[#08090C] shadow-md transition-all active:scale-95">
-                    <svg class="w-4 h-4 text-pink-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                  <a id="btn-action-insta" href="${settings.social.instagram}" target="_blank" class="min-h-[40px] sm:min-h-[44px] lg:min-h-[46px] w-full md:w-auto md:flex-1 lg:max-w-[210px] flex items-center justify-center gap-1.5 sm:gap-2.5 lg:gap-3 px-2.5 sm:px-4 lg:px-5 py-2 sm:py-2.5 rounded-xl sm:rounded-2xl font-sans font-bold text-[11px] sm:text-[12px] lg:text-[12.5px] tracking-wider uppercase bg-[#F7F3EC]/95 hover:bg-white border border-[#E8DED0] hover:border-[#C59B27] text-[#171717] shadow-sm hover:shadow-md transition-all active:scale-95">
+                    <svg class="w-4 h-4 text-[#c13584]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
                     <span class="truncate">INSTAGRAM</span>
                   </a>
-                  <a id="btn-action-email" href="mailto:${settings.contact.email}" class="min-h-[44px] sm:min-h-[48px] lg:min-h-[52px] w-full md:w-auto md:flex-1 lg:max-w-[220px] flex items-center justify-center gap-1.5 sm:gap-2.5 lg:gap-3 px-2.5 sm:px-4 lg:px-6 py-3 sm:py-3.5 rounded-xl sm:rounded-2xl font-bold text-[11px] sm:text-xs lg:text-sm tracking-wider uppercase bg-white/95 hover:bg-white border-2 border-[#D4C8B8] hover:border-[#8A662E] text-[#08090C] shadow-md transition-all active:scale-95">
-                    <svg class="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                  <a id="btn-action-email" href="mailto:${settings.contact.email}" class="min-h-[40px] sm:min-h-[44px] lg:min-h-[46px] w-full md:w-auto md:flex-1 lg:max-w-[210px] flex items-center justify-center gap-1.5 sm:gap-2.5 lg:gap-3 px-2.5 sm:px-4 lg:px-5 py-2 sm:py-2.5 rounded-xl sm:rounded-2xl font-sans font-bold text-[11px] sm:text-[12px] lg:text-[12.5px] tracking-wider uppercase bg-[#F7F3EC]/95 hover:bg-white border border-[#E8DED0] hover:border-[#C59B27] text-[#171717] shadow-sm hover:shadow-md transition-all active:scale-95">
+                    <svg class="w-4 h-4 text-[#2563eb]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
                     <span class="truncate">EMAIL US</span>
                   </a>
                 </div>
@@ -460,33 +462,39 @@
 
             </section>
 
-            <!-- Modular Business Description -->
-            <section class="w-full max-w-full rounded-2xl sm:rounded-3xl bg-white/95 border-2 border-[#D4C8B8] p-3.5 sm:p-5 md:p-6 shadow-xl backdrop-blur-md space-y-3 sm:space-y-4 overflow-hidden relative mt-2 sm:mt-3.5">
-              <div class="text-center max-w-2xl mx-auto space-y-0.5 sm:space-y-1 px-1">
-                <span class="text-[10px] sm:text-xs font-bold tracking-[0.2em] text-[#8A662E] uppercase flex items-center justify-center gap-1.5">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
-                  <span>Bespoke Architectural Solutions</span>
+            <!-- Lower Architectural Information Panel (Increased Box & Inner Card Heights) -->
+            <section class="w-full max-w-full rounded-2xl sm:rounded-3xl bg-[#F7F3EC]/95 border border-[#E8DED0] p-4 sm:p-6 lg:p-7 shadow-lg backdrop-blur-md space-y-3.5 sm:space-y-5 lg:space-y-6 overflow-hidden relative mt-3.5 sm:mt-5 lg:mt-6 shrink-0">
+              <div class="text-center max-w-2xl mx-auto space-y-1.5 px-1">
+                <span class="text-[10.5px] sm:text-[11.5px] lg:text-[12.5px] font-bold tracking-[0.24em] text-[#C59B27] uppercase flex items-center justify-center gap-1.5">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C59B27" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                  <span>Bespoke Interior Solutions</span>
                 </span>
-                <h2 class="font-serif text-lg sm:text-2xl md:text-3xl text-[#08090C] font-bold">${settings.modularDescription.heading}</h2>
-                <p class="text-[11px] sm:text-xs md:text-sm text-[#18191C] font-medium leading-relaxed">${settings.modularDescription.body}</p>
+                <h2 class="font-serif text-lg sm:text-2xl md:text-3xl lg:text-[26px] text-[#171717] font-bold tracking-tight uppercase">${settings.modularDescription.heading}</h2>
               </div>
 
-              <!-- Marquee Carousel - Moving Right to Left -->
-              <div class="relative w-full max-w-full overflow-hidden py-0.5 sm:py-1">
-                <div class="absolute left-0 top-0 bottom-0 w-8 sm:w-16 md:w-20 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
-                <div class="absolute right-0 top-0 bottom-0 w-8 sm:w-16 md:w-20 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
+              <!-- 3 Feature Cards (Marquee Carousel - Moving Right to Left - Increased Heights) -->
+              <div class="relative w-full max-w-full overflow-hidden py-1 sm:py-2">
+                <div class="absolute left-0 top-0 bottom-0 w-8 sm:w-16 md:w-20 bg-gradient-to-r from-[#F7F3EC] to-transparent z-10 pointer-events-none"></div>
+                <div class="absolute right-0 top-0 bottom-0 w-8 sm:w-16 md:w-20 bg-gradient-to-l from-[#F7F3EC] to-transparent z-10 pointer-events-none"></div>
 
-                <div class="animate-marquee-right-to-left flex gap-3 sm:gap-4 px-2 sm:px-4 cursor-grab">
+                <div class="animate-marquee-right-to-left flex gap-3.5 sm:gap-5 px-2 sm:px-4 cursor-grab">
                   ${[...settings.modularDescription.features, ...settings.modularDescription.features, ...settings.modularDescription.features].map(f => `
-                    <div class="w-[240px] sm:w-[290px] md:w-[340px] flex-shrink-0 p-3.5 sm:p-4.5 rounded-xl sm:rounded-2xl bg-[#FAF8F5] border border-[#D4C8B8] space-y-1 sm:space-y-1.5 hover:border-[#8A662E] hover:bg-white hover:shadow-lg transition-all select-none">
+                    <div class="w-[260px] sm:w-[310px] md:w-[355px] flex-shrink-0 p-4 sm:p-5 lg:p-6 rounded-xl sm:rounded-2xl bg-white border border-[#E8DED0] space-y-2 sm:space-y-2.5 hover:border-[#C59B27] hover:shadow-md transition-all select-none">
                       <div class="flex items-center gap-2">
-                        <span class="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-[#C5A572] shrink-0"></span>
-                        <h3 class="font-serif text-xs sm:text-sm font-bold text-[#08090C] uppercase tracking-wide">${f.title}</h3>
+                        <span class="w-2.5 h-2.5 rounded-full bg-[#C59B27] shrink-0"></span>
+                        <h3 class="font-serif text-xs sm:text-[14px] lg:text-[15px] font-bold text-[#171717] tracking-wide uppercase">${f.title}</h3>
                       </div>
-                      <p class="text-[11px] sm:text-xs text-[#25272C] font-medium leading-relaxed pl-3.5 sm:pl-4.5">${f.desc}</p>
+                      <p class="text-[11.5px] sm:text-[12.5px] lg:text-[13.5px] text-[#3F3A35] font-normal leading-relaxed pl-4">${f.desc}</p>
                     </div>
                   `).join('')}
                 </div>
+              </div>
+
+              <!-- Lower Section Only Brand Description -->
+              <div class="text-center max-w-3xl mx-auto border-t border-[#E8DED0]/80 pt-3 sm:pt-4 lg:pt-5">
+                <p class="text-xs sm:text-sm md:text-base lg:text-[16px] text-[#3F3A35] font-medium leading-relaxed px-2">
+                  ${settings.modularDescription.body}
+                </p>
               </div>
             </section>
 

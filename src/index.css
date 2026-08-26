@@ -22,6 +22,18 @@
   }
 }
 
+@font-face {
+  font-family: 'Gulams Condensed';
+  src: local('Gulams Condensed Ext Bd'), local('Gulams-Condensed-Ext-Bd'), local('GulamsCondensed');
+  font-weight: 800;
+  font-style: normal;
+}
+
+.font-gulams {
+  font-family: 'Gulams Condensed', 'Gulams', 'Cinzel', 'Plus Jakarta Sans', sans-serif;
+  font-stretch: condensed;
+}
+
 /* Custom Luxury Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;

@@ -43,10 +43,13 @@ export const getSiteSettings = (): SiteSettings => {
     if (settings.branding?.subTitle) {
       settings.branding.subTitle = settings.branding.subTitle.replace('MODULARS', 'MODULAR');
     }
+    if (settings.hero) {
+      settings.hero.description = DEFAULT_SITE_SETTINGS.hero.description;
+    }
     if (settings.modularDescription) {
-      if (!settings.modularDescription.body || settings.modularDescription.body.includes('creates refined interior spaces')) {
-        settings.modularDescription.body = DEFAULT_SITE_SETTINGS.modularDescription.body;
-      }
+      settings.modularDescription.heading = DEFAULT_SITE_SETTINGS.modularDescription.heading;
+      settings.modularDescription.body = DEFAULT_SITE_SETTINGS.modularDescription.body;
+      settings.modularDescription.features = DEFAULT_SITE_SETTINGS.modularDescription.features;
     }
     return settings;
   } catch {
@@ -65,10 +68,15 @@ export const getDraftSettings = (): SiteSettings => {
     if (settings.branding?.subTitle) {
       settings.branding.subTitle = settings.branding.subTitle.replace('MODULARS', 'MODULAR');
     }
-    if (settings.modularDescription) {
-      if (!settings.modularDescription.body || settings.modularDescription.body.includes('creates refined interior spaces')) {
-        settings.modularDescription.body = DEFAULT_SITE_SETTINGS.modularDescription.body;
+    if (settings.hero) {
+      if (!settings.hero.description || settings.hero.description.includes('making a few improvements') || settings.hero.description.includes('crafted to make every space feel distinctly yours')) {
+        settings.hero.description = DEFAULT_SITE_SETTINGS.hero.description;
       }
+    }
+    if (settings.modularDescription) {
+      settings.modularDescription.heading = DEFAULT_SITE_SETTINGS.modularDescription.heading;
+      settings.modularDescription.body = DEFAULT_SITE_SETTINGS.modularDescription.body;
+      settings.modularDescription.features = DEFAULT_SITE_SETTINGS.modularDescription.features;
     }
     return settings;
   } catch {
