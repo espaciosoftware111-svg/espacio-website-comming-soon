@@ -28,7 +28,7 @@ export const EspacioMonogram: React.FC<EspacioMonogramProps> = ({
   useImage = false,
 }) => {
   const isDarkTheme = variant === 'dark' || variant === 'black';
-  const viewBox = tightFit ? '10 6 80 84' : '0 0 100 100';
+  const viewBox = tightFit ? '12 12 76 76' : '0 0 100 100';
 
   const primaryColor =
     variant === 'gold'
