@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { SiteSettings } from '../types/settings';
-import { playLuxuryChime, playShimmerSweep, playTactileClick } from '../utils/audio';
+import { playLuxuryChime, playShimmerSweep, playTactileClick, playCharTypingSound, preloadKeyboardBuffer } from '../utils/audio';
 
 interface ExactLogoAnimationProps {
   settings: SiteSettings;
@@ -22,6 +22,8 @@ export const ExactLogoAnimation: React.FC<ExactLogoAnimationProps> = ({
 
   const startTimeRef = useRef<number | null>(null);
   const animFrameRef = useRef<number | null>(null);
+  const prevLen1Ref = useRef(0);
+  const prevLen2Ref = useRef(0);
 
   const primaryTagline = settings.taglines?.primary || settings.branding.tagline1 || 'Designing Spaces';
   const secondaryTagline = settings.taglines?.secondary || settings.branding.tagline2 || 'Defining Lifestyles';
@@ -32,6 +34,37 @@ export const ExactLogoAnimation: React.FC<ExactLogoAnimationProps> = ({
   });
 
   const speed = settings.animations.animationSpeedMultiplier || 1.0;
+
+  // Preload authentic keyboard audio buffer on mount
+  useEffect(() => {
+    preloadKeyboardBuffer();
+  }, []);
+
+  // Character-perfect sound sync: Line 1
+  useEffect(() => {
+    if (!tagline1Typed) {
+      prevLen1Ref.current = 0;
+      return;
+    }
+    if (tagline1Typed.length > prevLen1Ref.current) {
+      const char = tagline1Typed[tagline1Typed.length - 1];
+      playCharTypingSound(char === ' ');
+      prevLen1Ref.current = tagline1Typed.length;
+    }
+  }, [tagline1Typed]);
+
+  // Character-perfect sound sync: Line 2
+  useEffect(() => {
+    if (!tagline2Typed) {
+      prevLen2Ref.current = 0;
+      return;
+    }
+    if (tagline2Typed.length > prevLen2Ref.current) {
+      const char = tagline2Typed[tagline2Typed.length - 1];
+      playCharTypingSound(char === ' ');
+      prevLen2Ref.current = tagline2Typed.length;
+    }
+  }, [tagline2Typed]);
 
   useEffect(() => {
     const animateLoop = (timestamp: number) => {
@@ -52,24 +85,28 @@ export const ExactLogoAnimation: React.FC<ExactLogoAnimationProps> = ({
         playShimmerSweep();
       }
 
-      // Tagline 1 Typewriter (5.2s to 6.0s - Slower, 20% reduced ending speed for editorial elegance)
-      if (elapsed >= 5.2) {
-        const p1 = Math.min(1, (elapsed - 5.2) / 0.8);
+      // Tagline 1 Typewriter (5.2s to 6.2s - Rhythmic, natural keystroke pace)
+      if (elapsed >= 5.2 && elapsed < 6.3) {
+        const p1 = Math.min(1, (elapsed - 5.2) / 1.0);
         setTagline1Typed(primaryTagline.slice(0, Math.floor(p1 * primaryTagline.length)));
+      } else if (elapsed >= 6.3) {
+        setTagline1Typed(primaryTagline);
       } else {
         setTagline1Typed('');
       }
 
-      // Tagline 2 Typewriter (6.3s to 7.2s)
-      if (elapsed >= 6.3) {
-        const p2 = Math.min(1, (elapsed - 6.3) / 0.9);
+      // Tagline 2 Typewriter (6.4s to 7.6s)
+      if (elapsed >= 6.4 && elapsed < 7.7) {
+        const p2 = Math.min(1, (elapsed - 6.4) / 1.15);
         setTagline2Typed(secondaryTagline.slice(0, Math.floor(p2 * secondaryTagline.length)));
+      } else if (elapsed >= 7.7) {
+        setTagline2Typed(secondaryTagline);
       } else {
         setTagline2Typed('');
       }
 
-      // Tagline Highlight Effect (7.4s - Luminous gold aura)
-      if (elapsed >= 7.4) {
+      // Tagline Highlight Effect (7.8s - Luminous gold aura)
+      if (elapsed >= 7.8) {
         setTaglinesHighlighted(true);
       }
 

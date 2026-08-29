@@ -25,6 +25,9 @@ export const PublicComingSoon: React.FC<PublicComingSoonProps> = ({
   settings,
 }) => {
   const [isLogoHovered, setIsLogoHovered] = useState(false);
+  const [isButtonHovered, setIsButtonHovered] = useState(false);
+
+  const isLampLit = isLogoHovered || isButtonHovered;
   const primaryTagline = settings.taglines?.primary || settings.branding.tagline1 || 'Designing Spaces';
   const secondaryTagline = settings.taglines?.secondary || settings.branding.tagline2 || 'Defining Lifestyles';
 
@@ -88,9 +91,9 @@ export const PublicComingSoon: React.FC<PublicComingSoonProps> = ({
             onMouseEnter={() => setIsLogoHovered(true)}
             onMouseLeave={() => setIsLogoHovered(false)}
           >
-            {/* Monogram Emblem (Larger on mobile) */}
-            <div className="w-11 h-11 xs:w-12 xs:h-12 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-13 lg:h-13 flex items-center justify-center transition-transform group-hover:scale-105 shrink-0">
-              <EspacioMonogram size="100%" className="w-full h-full" variant="dark" isLightOn={isLogoHovered} glow={isLogoHovered} tightFit={true} useImage={false} />
+            {/* Monogram Emblem (Larger on mobile, glows when hovered or when action buttons are hovered) */}
+            <div className={`w-11 h-11 xs:w-12 xs:h-12 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-13 lg:h-13 flex items-center justify-center transition-all duration-300 shrink-0 ${isLampLit ? 'scale-110 drop-shadow-[0_0_16px_rgba(223,194,141,0.7)]' : 'group-hover:scale-105'}`}>
+              <EspacioMonogram size="100%" className="w-full h-full" variant="dark" isLightOn={isLampLit} glow={isLampLit} tightFit={true} useImage={false} />
             </div>
 
             {/* Typography Lockup - Bold & Prominent on mobile */}
@@ -189,6 +192,8 @@ export const PublicComingSoon: React.FC<PublicComingSoonProps> = ({
                       target={btn.type === 'whatsapp' || btn.type === 'instagram' || btn.type === 'maps' ? '_blank' : undefined}
                       rel="noopener noreferrer"
                       onClick={() => handleButtonClick(btn.type as any)}
+                      onMouseEnter={() => setIsButtonHovered(true)}
+                      onMouseLeave={() => setIsButtonHovered(false)}
                       className="min-h-[36px] sm:min-h-[38px] lg:min-h-[40px] w-full md:w-auto md:flex-1 lg:max-w-[200px] flex items-center justify-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-xl sm:rounded-xl font-sans font-bold text-[10px] sm:text-[11.5px] lg:text-[12px] tracking-wider uppercase bg-[#F7F3EC]/95 hover:bg-white border border-[#E8DED0] hover:border-[#C59B27] text-[#171717] shadow-sm hover:shadow-md transition-all active:scale-95"
                     >
                       {renderButtonIcon(btn.type)}

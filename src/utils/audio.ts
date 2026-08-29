@@ -29,8 +29,128 @@ export const initSoundState = (): boolean => {
   if (typeof window !== 'undefined') {
     const saved = localStorage.getItem('espacio_sound_enabled');
     soundEnabled = saved !== '0';
+
+    const unlockAudio = () => {
+      if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    };
+    ['click', 'touchstart', 'keydown', 'pointerdown'].forEach((evt) => {
+      window.addEventListener(evt, unlockAudio, { passive: true });
+    });
   }
   return soundEnabled;
+};
+
+let decodedTypingBuffer: AudioBuffer | null = null;
+let isDecodingBuffer = false;
+
+// Preload and decode the authentic keyboard typing audio buffer
+export const preloadKeyboardBuffer = async (): Promise<void> => {
+  if (typeof window === 'undefined' || decodedTypingBuffer || isDecodingBuffer) return;
+  const ctx = getAudioContext();
+  if (!ctx) return;
+
+  isDecodingBuffer = true;
+  try {
+    const res = await fetch('./keyboard-typing.mp3');
+    const arrayBuf = await res.arrayBuffer();
+    decodedTypingBuffer = await ctx.decodeAudioData(arrayBuf);
+  } catch {
+    // Graceful fallback
+  } finally {
+    isDecodingBuffer = false;
+  }
+};
+
+// Precise keystroke transient timestamps inside keyboard-typing.mp3
+const KEYSTROKE_SLICES = [
+  0.06, 0.18, 0.32, 0.46, 0.60, 0.74, 0.88, 1.02, 1.16, 1.30, 1.44, 1.58, 1.72
+];
+
+let lastSliceIdx = -1;
+
+const playSynthKeyStroke = (ctx: AudioContext, now: number, isSpace: boolean): void => {
+  const pitch = (isSpace ? 0.75 : 1.0) * (0.92 + Math.random() * 0.16);
+
+  const osc = ctx.createOscillator();
+  const filter = ctx.createBiquadFilter();
+  const gain = ctx.createGain();
+
+  osc.type = 'triangle';
+  osc.frequency.setValueAtTime((isSpace ? 1400 : 2800) * pitch, now);
+  osc.frequency.exponentialRampToValueAtTime(300, now + 0.04);
+
+  filter.type = 'highpass';
+  filter.frequency.setValueAtTime(600, now);
+
+  gain.gain.setValueAtTime(isSpace ? 1.4 : 1.2, now);
+  gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.05);
+
+  osc.connect(filter);
+  filter.connect(gain);
+  gain.connect(ctx.destination);
+
+  osc.start(now);
+  osc.stop(now + 0.055);
+};
+
+/** Plays an authentic keystroke sound in exact synchronization with each typed character (Ultra Boosted Loudness) */
+export const playCharTypingSound = (isSpace = false): void => {
+  if (!soundEnabled) return;
+  try {
+    const ctx = getAudioContext();
+    if (!ctx) return;
+
+    if (!decodedTypingBuffer && !isDecodingBuffer) {
+      preloadKeyboardBuffer();
+    }
+
+    const now = ctx.currentTime;
+
+    if (decodedTypingBuffer) {
+      // Pick next varied keystroke slice
+      let sliceIdx = Math.floor(Math.random() * KEYSTROKE_SLICES.length);
+      if (sliceIdx === lastSliceIdx) {
+        sliceIdx = (sliceIdx + 1) % KEYSTROKE_SLICES.length;
+      }
+      lastSliceIdx = sliceIdx;
+
+      const offset = KEYSTROKE_SLICES[sliceIdx];
+      const sliceDuration = isSpace ? 0.14 : 0.11;
+
+      const source = ctx.createBufferSource();
+      source.buffer = decodedTypingBuffer;
+      source.playbackRate.setValueAtTime(0.96 + Math.random() * 0.08, now);
+
+      // Studio-grade punch compressor to maximize acoustic energy without clipping
+      const compressor = ctx.createDynamicsCompressor();
+      compressor.threshold.setValueAtTime(-10, now);
+      compressor.knee.setValueAtTime(6, now);
+      compressor.ratio.setValueAtTime(6, now);
+      compressor.attack.setValueAtTime(0.001, now);
+      compressor.release.setValueAtTime(0.06, now);
+
+      // High-gain pre-amp boost (6.5x loud volume)
+      const gain = ctx.createGain();
+      gain.gain.setValueAtTime(isSpace ? 7.5 : 6.2, now);
+      gain.gain.exponentialRampToValueAtTime(0.01, now + sliceDuration);
+
+      source.connect(gain);
+      gain.connect(compressor);
+      compressor.connect(ctx.destination);
+
+      source.start(now, offset, sliceDuration);
+    } else {
+      playSynthKeyStroke(ctx, now, isSpace);
+    }
+  } catch {
+    // Ignore
+  }
+};
+
+export const playTypingSound = (): void => {
+  playCharTypingSound(false);
 };
 
 /** Plays a soft luxury crystal chime for the monogram reveal */

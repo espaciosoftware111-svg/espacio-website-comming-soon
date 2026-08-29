@@ -52,19 +52,18 @@ export const EspacioMonogram: React.FC<EspacioMonogramProps> = ({
         className="relative flex items-center justify-center w-full h-full"
       >
         {/* Ambient Warm Backlight */}
-        {(glow || isLightOn) && (
-          <div
-            className="absolute inset-0 rounded-2xl filter blur-xl opacity-60 pointer-events-none transition-opacity duration-700"
-            style={{
-              background:
-                variant === 'gold'
-                  ? 'radial-gradient(circle, rgba(197,165,114,0.45) 0%, rgba(197,165,114,0) 70%)'
-                  : isDarkTheme
-                  ? 'radial-gradient(circle at 30% 40%, rgba(255,220,150,0.3) 0%, rgba(0,0,0,0) 65%)'
-                  : 'radial-gradient(circle, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0) 70%)',
-            }}
-          />
-        )}
+        <div
+          className="absolute inset-0 rounded-2xl filter blur-xl pointer-events-none transition-all duration-400"
+          style={{
+            opacity: (glow || isLightOn) ? 0.85 : 0,
+            background:
+              variant === 'gold'
+                ? 'radial-gradient(circle, rgba(197,165,114,0.55) 0%, rgba(197,165,114,0) 70%)'
+                : isDarkTheme
+                ? 'radial-gradient(circle at 35% 42%, rgba(223,194,141,0.7) 0%, rgba(197,165,114,0.3) 40%, rgba(0,0,0,0) 70%)'
+                : 'radial-gradient(circle, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0) 70%)',
+          }}
+        />
 
         {useImage ? (
           <img
@@ -184,28 +183,33 @@ export const EspacioMonogram: React.FC<EspacioMonogramProps> = ({
             />
 
             {/* Lamp Warm Downward Light Beam & Glow */}
-            {isLightOn && (
-              <g id="lamp-beam-container">
-                {/* Radial Glow underneath shade */}
-                <ellipse
-                  cx="29"
-                  cy="46"
-                  rx="14"
-                  ry="10"
-                  fill="url(#lampWarmGlow)"
-                  opacity="0.85"
-                />
-                {/* Cone Beam */}
-                <polygon
-                  points="20,42 38,42 48,68 10,68"
-                  fill="url(#lampWarmGlow)"
-                  opacity="0.75"
-                />
-                {/* Luminous bulb underside */}
-                <ellipse cx="29" cy="42" rx="7" ry="1.6" fill="#FFFCE6" />
-                <circle cx="29" cy="42.5" r="2.8" fill="#FFE899" opacity="0.9" />
-              </g>
-            )}
+            <g
+              id="lamp-beam-container"
+              style={{
+                opacity: isLightOn ? 1 : 0,
+                transition: 'opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
+                pointerEvents: 'none',
+              }}
+            >
+              {/* Radial Glow underneath shade */}
+              <ellipse
+                cx="29"
+                cy="46"
+                rx="14"
+                ry="10"
+                fill="url(#lampWarmGlow)"
+                opacity="0.85"
+              />
+              {/* Cone Beam */}
+              <polygon
+                points="20,42 38,42 48,68 10,68"
+                fill="url(#lampWarmGlow)"
+                opacity="0.75"
+              />
+              {/* Luminous bulb underside */}
+              <ellipse cx="29" cy="42" rx="7" ry="1.6" fill="#FFFCE6" />
+              <circle cx="29" cy="42.5" r="2.8" fill="#FFE899" opacity="0.9" />
+            </g>
           </g>
 
           {/* 7. Geometric Modern Sans-Serif 'E' in Lower-Right Quadrant */}

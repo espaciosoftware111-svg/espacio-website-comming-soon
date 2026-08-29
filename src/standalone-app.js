@@ -240,6 +240,89 @@
     } catch (e) {}
   }
 
+  let decodedTypingBuffer = null;
+  let isDecodingBuffer = false;
+
+  function preloadKeyboardBuffer() {
+    if (!audioCtx || decodedTypingBuffer || isDecodingBuffer) return;
+    isDecodingBuffer = true;
+    fetch('./keyboard-typing.mp3')
+      .then(res => res.arrayBuffer())
+      .then(buf => audioCtx.decodeAudioData(buf))
+      .then(decoded => { decodedTypingBuffer = decoded; })
+      .catch(() => {})
+      .finally(() => { isDecodingBuffer = false; });
+  }
+
+  const KEYSTROKE_SLICES = [0.06, 0.18, 0.32, 0.46, 0.60, 0.74, 0.88, 1.02, 1.16, 1.30, 1.44, 1.58, 1.72];
+  let lastSliceIdx = -1;
+
+  function playCharTyping(isSpace = false) {
+    if (!soundOn) return;
+    try {
+      const ctx = getAudioCtx();
+      if (!ctx) return;
+      if (!decodedTypingBuffer) preloadKeyboardBuffer();
+      const now = ctx.currentTime;
+
+      if (decodedTypingBuffer) {
+        let sliceIdx = Math.floor(Math.random() * KEYSTROKE_SLICES.length);
+        if (sliceIdx === lastSliceIdx) sliceIdx = (sliceIdx + 1) % KEYSTROKE_SLICES.length;
+        lastSliceIdx = sliceIdx;
+
+        const offset = KEYSTROKE_SLICES[sliceIdx];
+        const sliceDuration = isSpace ? 0.14 : 0.11;
+        const source = ctx.createBufferSource();
+        source.buffer = decodedTypingBuffer;
+        source.playbackRate.setValueAtTime(0.96 + Math.random() * 0.08, now);
+
+        const compressor = ctx.createDynamicsCompressor();
+        compressor.threshold.setValueAtTime(-10, now);
+        compressor.knee.setValueAtTime(6, now);
+        compressor.ratio.setValueAtTime(6, now);
+        compressor.attack.setValueAtTime(0.001, now);
+        compressor.release.setValueAtTime(0.06, now);
+
+        const gain = ctx.createGain();
+        gain.gain.setValueAtTime(isSpace ? 7.5 : 6.2, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + sliceDuration);
+
+        source.connect(gain);
+        gain.connect(compressor);
+        compressor.connect(ctx.destination);
+        source.start(now, offset, sliceDuration);
+      } else {
+        const pitch = (isSpace ? 0.75 : 1.0) * (0.92 + Math.random() * 0.16);
+        const osc = ctx.createOscillator();
+        const filter = ctx.createBiquadFilter();
+        const gain = ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime((isSpace ? 1400 : 2800) * pitch, now);
+        osc.frequency.exponentialRampToValueAtTime(300, now + 0.04);
+        filter.type = 'highpass';
+        filter.frequency.setValueAtTime(600, now);
+        gain.gain.setValueAtTime(isSpace ? 1.4 : 1.2, now);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.05);
+        osc.connect(filter);
+        filter.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.055);
+      }
+    } catch (e) {}
+  }
+
+  if (typeof window !== 'undefined') {
+    const unlockAudio = () => {
+      if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    };
+    ['click', 'touchstart', 'keydown', 'pointerdown'].forEach((evt) => {
+      window.addEventListener(evt, unlockAudio, { passive: true });
+    });
+  }
+
   trackVisit();
 
   function route() {
@@ -255,11 +338,12 @@
   window.addEventListener('hashchange', route);
 
   // EXACT SVG LOGO MATCHING UPLOADED REFERENCE
-  function getExactLogoSVG(color = '#FFFFFF', isLightOn = false, pendantOffset = 0) {
+  function getExactLogoSVG(color = '#FFFFFF', isLightOn = false, pendantOffset = 0, idPrefix = 'svg') {
+    const isVisible = pendantOffset === 0 ? '1' : '0';
     return `
       <svg viewBox="0 0 100 100" class="w-full h-full overflow-visible" fill="none">
         <defs>
-          <radialGradient id="pendantBeamMaster" cx="50%" cy="0%" r="90%">
+          <radialGradient id="${idPrefix}-pendantBeamMaster" cx="50%" cy="0%" r="90%">
             <stop offset="0%" stop-color="#FFF8E7" stop-opacity="0.95" />
             <stop offset="40%" stop-color="#DFC28D" stop-opacity="0.55" />
             <stop offset="80%" stop-color="#C5A572" stop-opacity="0.18" />
@@ -268,22 +352,22 @@
         </defs>
 
         <!-- 1. Upper-Left Horizontal Line (Lamp Top Bar) -->
-        <line id="svg-top-left" x1="14" y1="14" x2="44" y2="14" stroke="${color}" stroke-width="3.2" stroke-linecap="square" />
+        <line id="${idPrefix}-top-left" x1="14" y1="14" x2="44" y2="14" stroke="${color}" stroke-width="3.2" stroke-linecap="square" />
         
         <!-- 2. Upper-Right Horizontal Line (With clear open gap from X=44 to X=54) -->
-        <line id="svg-top-right" x1="54" y1="14" x2="86" y2="14" stroke="${color}" stroke-width="3.2" stroke-linecap="square" />
+        <line id="${idPrefix}-top-right" x1="54" y1="14" x2="86" y2="14" stroke="${color}" stroke-width="3.2" stroke-linecap="square" />
         
         <!-- 3. Right Vertical Line -->
-        <line id="svg-right-vert" x1="86" y1="14" x2="86" y2="86" stroke="${color}" stroke-width="3.2" stroke-linecap="square" />
+        <line id="${idPrefix}-right-vert" x1="86" y1="14" x2="86" y2="86" stroke="${color}" stroke-width="3.2" stroke-linecap="square" />
         
         <!-- 4. Bottom Horizontal Line -->
-        <line id="svg-bottom-horiz" x1="86" y1="86" x2="14" y2="86" stroke="${color}" stroke-width="3.2" stroke-linecap="square" />
+        <line id="${idPrefix}-bottom-horiz" x1="86" y1="86" x2="14" y2="86" stroke="${color}" stroke-width="3.2" stroke-linecap="square" />
         
         <!-- 5. Left Vertical Line (STOPS AT Y=48, PRESERVING OPEN TOP-LEFT CORNER!) -->
-        <line id="svg-left-vert" x1="14" y1="86" x2="14" y2="48" stroke="${color}" stroke-width="3.2" stroke-linecap="square" />
+        <line id="${idPrefix}-left-vert" x1="14" y1="86" x2="14" y2="48" stroke="${color}" stroke-width="3.2" stroke-linecap="square" />
 
         <!-- 6. Bold Geometric Sans-Serif 'E' in Lower-Right Quadrant -->
-        <g id="svg-letter-e" opacity="0">
+        <g id="${idPrefix}-letter-e" opacity="${isVisible}">
           <line x1="58" y1="44" x2="58" y2="78" stroke="${color}" stroke-width="4.8" stroke-linecap="square" />
           <line x1="58" y1="44" x2="76" y2="44" stroke="${color}" stroke-width="4.8" stroke-linecap="square" />
           <line x1="58" y1="61" x2="72" y2="61" stroke="${color}" stroke-width="4.2" stroke-linecap="square" />
@@ -291,14 +375,14 @@
         </g>
 
         <!-- 7. Minimal Architectural Pendant Lamp (Upper-Left Area) -->
-        <g id="svg-pendant-lamp" opacity="0" transform="translate(0, ${pendantOffset})">
+        <g id="${idPrefix}-pendant-lamp" opacity="${isVisible}" transform="translate(0, ${pendantOffset})">
           <line x1="29" y1="14" x2="29" y2="28" stroke="${color}" stroke-width="2.4" stroke-linecap="round" />
           <polygon points="25.5,28 32.5,28 38,42 20,42" fill="${color}" stroke="${color}" stroke-width="0.8" stroke-linejoin="round" />
           
           <!-- Light Glow Cone -->
-          <g id="svg-light-glow" opacity="${isLightOn ? '1' : '0'}">
-            <ellipse cx="29" cy="46" rx="14" ry="10" fill="url(#pendantBeamMaster)" opacity="0.9" />
-            <polygon points="20,42 38,42 48,68 10,68" fill="url(#pendantBeamMaster)" opacity="0.85" />
+          <g id="${idPrefix}-light-glow" opacity="${isLightOn ? '1' : '0'}" style="transition: opacity 0.35s ease;">
+            <ellipse cx="29" cy="46" rx="14" ry="10" fill="url(#${idPrefix}-pendantBeamMaster)" opacity="0.9" />
+            <polygon points="20,42 38,42 48,68 10,68" fill="url(#${idPrefix}-pendantBeamMaster)" opacity="0.85" />
             <ellipse cx="28" cy="42" rx="7" ry="1.6" fill="#FFFCE6" />
             <circle cx="28" cy="42.5" r="2.8" fill="#FFEAA7" opacity="0.95" />
           </g>
@@ -393,8 +477,8 @@
               
               <!-- Left: Brand Monogram & Title - Exact Image 2 Lockup Structure -->
               <div class="flex items-center gap-3 lg:gap-4 select-none">
-                <div class="w-9 h-9 sm:w-11 sm:h-11 lg:w-16 lg:h-16 rounded-xl lg:rounded-2xl bg-[#121316] border border-[#C5A572]/40 flex items-center justify-center p-1 sm:p-1.5 lg:p-2.5 shadow-[0_4px_16px_rgba(0,0,0,0.25)] transition-transform hover:scale-105 shrink-0">
-                  ${getExactLogoSVG('#FFFFFF', false, 0)}
+                <div id="nav-brand-logo" class="w-9 h-9 sm:w-11 sm:h-11 lg:w-16 lg:h-16 rounded-xl lg:rounded-2xl bg-[#121316] border border-[#C5A572]/40 flex items-center justify-center p-1 sm:p-1.5 lg:p-2.5 shadow-[0_4px_16px_rgba(0,0,0,0.25)] transition-all duration-300 hover:scale-105 shrink-0">
+                  ${getExactLogoSVG('#FFFFFF', false, 0, 'nav-logo')}
                 </div>
                 <div class="flex flex-col justify-center min-w-[130px] sm:min-w-[160px] lg:min-w-[220px]">
                   <span class="font-sans text-base sm:text-lg md:text-xl lg:text-3xl font-bold tracking-[0.22em] lg:tracking-[0.26em] text-[#08090C] leading-none drop-shadow-[0_1px_8px_rgba(255,255,255,0.9)]">${settings.branding.name}</span>
@@ -522,9 +606,32 @@
     const typeLine2 = document.getElementById('type-line-2');
     const taglineHeroBox = document.getElementById('tagline-hero-box');
 
+    const navLogoGlow = document.getElementById('nav-logo-light-glow');
+    const navLogoBox = document.getElementById('nav-brand-logo');
+
+    function setNavLight(on) {
+      if (navLogoGlow) navLogoGlow.setAttribute('opacity', on ? '1' : '0');
+      if (navLogoBox) {
+        if (on) {
+          navLogoBox.classList.add('scale-110', 'shadow-[0_0_22px_rgba(223,194,141,0.7)]', 'border-[#C5A572]');
+        } else {
+          navLogoBox.classList.remove('scale-110', 'shadow-[0_0_22px_rgba(223,194,141,0.7)]', 'border-[#C5A572]');
+        }
+      }
+    }
+
+    if (navLogoBox) {
+      navLogoBox.addEventListener('mouseenter', () => setNavLight(true));
+      navLogoBox.addEventListener('mouseleave', () => setNavLight(false));
+    }
+
     ['wa', 'call', 'insta', 'email'].forEach(type => {
       const el = document.getElementById(`btn-action-${type}`);
-      if (el) el.addEventListener('click', () => { playClick(); trackClick(type === 'insta' ? 'instagram' : type); });
+      if (el) {
+        el.addEventListener('mouseenter', () => setNavLight(true));
+        el.addEventListener('mouseleave', () => setNavLight(false));
+        el.addEventListener('click', () => { playClick(); trackClick(type === 'insta' ? 'instagram' : type); });
+      }
     });
 
     if (soundBtn) {
@@ -538,6 +645,7 @@
     function triggerBeigeTransition() {
       if (animId) cancelAnimationFrame(animId);
       if (introScreen && publicWeb) {
+        stopTypingAudio();
         introScreen.style.transform = 'translate3d(0, -35vh, 0)';
         introScreen.style.opacity = '0';
         introScreen.style.filter = 'blur(4px)';
@@ -550,13 +658,14 @@
       }
     }
 
-    if (skipBtn) skipBtn.addEventListener('click', () => { playClick(); triggerBeigeTransition(); });
-    if (replayBtn) replayBtn.addEventListener('click', () => { playClick(); renderPublic(); });
+    if (skipBtn) skipBtn.addEventListener('click', () => { stopTypingAudio(); playClick(); triggerBeigeTransition(); });
+    if (replayBtn) replayBtn.addEventListener('click', () => { stopTypingAudio(); playClick(); renderPublic(); });
 
     const svgE = document.getElementById('svg-letter-e');
     const svgPendant = document.getElementById('svg-pendant-lamp');
     const svgGlow = document.getElementById('svg-light-glow');
     let soundChimePlayed = false;
+    let typingSoundStarted = false;
 
     // EXACT FASTER START + 20% SLOWER ENDING TIMELINE (~8.8s)
     function startProceduralTimeline() {
@@ -604,20 +713,36 @@
           textGroup.classList.add('opacity-100', 'translate-y-0');
         }
 
-        // 5.2s Typewriter line 1 (Designing Spaces) - Slower 20% ending speed
-        if (elapsed >= 5.2 && typeLine1) {
-          const p1 = Math.min(1, (elapsed - 5.2) / 0.8);
-          typeLine1.innerText = primaryTagline.slice(0, Math.floor(p1 * primaryTagline.length));
+        // 5.2s Typewriter line 1 (Designing Spaces) - Exact character sound match
+        if (elapsed >= 5.2 && elapsed < 6.3 && typeLine1) {
+          const p1 = Math.min(1, (elapsed - 5.2) / 1.0);
+          const currentLen1 = Math.floor(p1 * primaryTagline.length);
+          if (currentLen1 > lastTypedLen1) {
+            const char = primaryTagline[currentLen1 - 1];
+            playCharTyping(char === ' ');
+            lastTypedLen1 = currentLen1;
+          }
+          typeLine1.innerText = primaryTagline.slice(0, currentLen1);
+        } else if (elapsed >= 6.3 && typeLine1) {
+          typeLine1.innerText = primaryTagline;
         }
 
-        // 6.3s Typewriter line 2 (Defining Lifestyles)
-        if (elapsed >= 6.3 && typeLine2) {
-          const p2 = Math.min(1, (elapsed - 6.3) / 0.9);
-          typeLine2.innerText = secondaryTagline.slice(0, Math.floor(p2 * secondaryTagline.length));
+        // 6.4s Typewriter line 2 (Defining Lifestyles)
+        if (elapsed >= 6.4 && elapsed < 7.7 && typeLine2) {
+          const p2 = Math.min(1, (elapsed - 6.4) / 1.15);
+          const currentLen2 = Math.floor(p2 * secondaryTagline.length);
+          if (currentLen2 > lastTypedLen2) {
+            const char = secondaryTagline[currentLen2 - 1];
+            playCharTyping(char === ' ');
+            lastTypedLen2 = currentLen2;
+          }
+          typeLine2.innerText = secondaryTagline.slice(0, currentLen2);
+        } else if (elapsed >= 7.7 && typeLine2) {
+          typeLine2.innerText = secondaryTagline;
         }
 
-        // 7.4s Tagline highlight effect
-        if (elapsed >= 7.4 && taglineHeroBox) {
+        // 7.8s Tagline highlight effect
+        if (elapsed >= 7.8 && taglineHeroBox) {
           taglineHeroBox.classList.add('scale-105', 'text-[#C5A572]');
         }
 
