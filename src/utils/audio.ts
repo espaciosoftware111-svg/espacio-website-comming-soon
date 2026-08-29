@@ -25,22 +25,50 @@ export const setSoundEnabled = (enabled: boolean): void => {
   }
 };
 
+export const unlockMobileAudio = (): void => {
+  if (typeof window === 'undefined') return;
+  try {
+    const ctx = getAudioContext();
+    if (ctx) {
+      if (ctx.state === 'suspended') {
+        ctx.resume().catch(() => {});
+      }
+      // Play iOS silent buffer warmup to lift hardware mute lock
+      const buffer = ctx.createBuffer(1, 1, 22050);
+      const source = ctx.createBufferSource();
+      source.buffer = buffer;
+      source.connect(ctx.destination);
+      source.start(0);
+    }
+    preloadKeyboardBuffer();
+  } catch {
+    // Ignore
+  }
+};
+
 export const initSoundState = (): boolean => {
   if (typeof window !== 'undefined') {
     const saved = localStorage.getItem('espacio_sound_enabled');
     soundEnabled = saved !== '0';
 
-    const unlockAudio = () => {
-      if (audioCtx && audioCtx.state === 'suspended') {
-        audioCtx.resume();
-      }
+    const handleUnlock = () => {
+      unlockMobileAudio();
     };
-    ['click', 'touchstart', 'keydown', 'pointerdown'].forEach((evt) => {
-      window.addEventListener(evt, unlockAudio, { passive: true });
+
+    ['touchstart', 'touchend', 'click', 'pointerdown', 'keydown'].forEach((evt) => {
+      window.addEventListener(evt, handleUnlock, { passive: true, once: false });
     });
+    
+    // Also try immediately
+    unlockMobileAudio();
   }
   return soundEnabled;
 };
+
+// Initialize immediately on module load
+if (typeof window !== 'undefined') {
+  initSoundState();
+}
 
 let decodedTypingBuffer: AudioBuffer | null = null;
 let isDecodingBuffer = false;
@@ -102,6 +130,10 @@ export const playCharTypingSound = (isSpace = false): void => {
     const ctx = getAudioContext();
     if (!ctx) return;
 
+    if (ctx.state === 'suspended') {
+      ctx.resume().catch(() => {});
+    }
+
     if (!decodedTypingBuffer && !isDecodingBuffer) {
       preloadKeyboardBuffer();
     }
@@ -143,6 +175,12 @@ export const playCharTypingSound = (isSpace = false): void => {
       source.start(now, offset, sliceDuration);
     } else {
       playSynthKeyStroke(ctx, now, isSpace);
+      // Extra mobile HTMLAudio backup if Web Audio is still loading
+      try {
+        const a = new Audio('./keyboard-typing.mp3');
+        a.volume = 1.0;
+        a.play().catch(() => {});
+      } catch {}
     }
   } catch {
     // Ignore

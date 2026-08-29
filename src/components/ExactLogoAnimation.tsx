@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { SiteSettings } from '../types/settings';
-import { playLuxuryChime, playShimmerSweep, playTactileClick, playCharTypingSound, preloadKeyboardBuffer } from '../utils/audio';
+import { playLuxuryChime, playShimmerSweep, playTactileClick, playCharTypingSound, preloadKeyboardBuffer, unlockMobileAudio, isSoundEnabled, setSoundEnabled } from '../utils/audio';
 
 interface ExactLogoAnimationProps {
   settings: SiteSettings;
@@ -19,6 +19,8 @@ export const ExactLogoAnimation: React.FC<ExactLogoAnimationProps> = ({
   const [tagline2Typed, setTagline2Typed] = useState('');
   const [taglinesHighlighted, setTaglinesHighlighted] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
+  const [soundOn, setSoundOn] = useState(() => isSoundEnabled());
+  const [hasInteracted, setHasInteracted] = useState(false);
 
   const startTimeRef = useRef<number | null>(null);
   const animFrameRef = useRef<number | null>(null);
@@ -35,9 +37,28 @@ export const ExactLogoAnimation: React.FC<ExactLogoAnimationProps> = ({
 
   const speed = settings.animations.animationSpeedMultiplier || 1.0;
 
+  const handleUserInteract = () => {
+    if (!hasInteracted) {
+      setHasInteracted(true);
+      unlockMobileAudio();
+    }
+  };
+
+  const handleToggleSound = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const next = !soundOn;
+    setSoundOn(next);
+    setSoundEnabled(next);
+    if (next) {
+      unlockMobileAudio();
+      playTactileClick();
+    }
+  };
+
   // Preload authentic keyboard audio buffer on mount
   useEffect(() => {
     preloadKeyboardBuffer();
+    unlockMobileAudio();
   }, []);
 
   // Character-perfect sound sync: Line 1
@@ -150,7 +171,9 @@ export const ExactLogoAnimation: React.FC<ExactLogoAnimationProps> = ({
             }
           : { opacity: 1, y: 0 }
       }
-      className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#08090C] text-white overflow-hidden select-none"
+      onClick={handleUserInteract}
+      onTouchStart={handleUserInteract}
+      className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#08090C] text-white overflow-hidden select-none cursor-pointer"
     >
       {/* Background Ambient Radial Glow */}
       <div
@@ -175,16 +198,34 @@ export const ExactLogoAnimation: React.FC<ExactLogoAnimationProps> = ({
         }}
       />
 
-      {/* Skip Button */}
-      {settings.animations.allowSkipIntro && (
-        <div className="absolute top-6 right-6 z-30">
+      {/* Top Controls: Sound Toggle & Skip */}
+      <div className="absolute top-6 left-6 right-6 z-30 flex items-center justify-between pointer-events-auto">
+        <button
+          onClick={handleToggleSound}
+          className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-white/15 bg-white/5 backdrop-blur-md text-[11px] font-medium tracking-widest text-neutral-300 hover:text-white hover:border-luxury-gold/50 transition-all active:scale-95 shadow-sm"
+          title="Toggle Experience Audio"
+        >
+          <span>{soundOn ? '🔊' : '🔇'}</span>
+          <span className="text-[10px] tracking-wider">{soundOn ? 'SOUND ON' : 'MUTED'}</span>
+        </button>
+
+        {settings.animations.allowSkipIntro && (
           <button
             onClick={handleSkip}
-            className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/15 bg-white/5 backdrop-blur-md text-xs tracking-widest text-neutral-300 hover:text-white hover:border-luxury-gold/50 transition-all active:scale-95 shadow-sm"
+            className="flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/15 bg-white/5 backdrop-blur-md text-[11px] font-medium tracking-widest text-neutral-300 hover:text-white hover:border-luxury-gold/50 transition-all active:scale-95 shadow-sm"
           >
             <span>SKIP INTRO</span>
             <span>&rarr;</span>
           </button>
+        )}
+      </div>
+
+      {/* Mobile Subtle Tap Hint Pill (fades away once user taps) */}
+      {!hasInteracted && elapsedTime < 4.8 && (
+        <div className="sm:hidden absolute bottom-8 z-30 pointer-events-none animate-pulse">
+          <div className="px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/15 text-[11px] tracking-wider text-neutral-300">
+            🔊 Tap anywhere to enable sound
+          </div>
         </div>
       )}
 

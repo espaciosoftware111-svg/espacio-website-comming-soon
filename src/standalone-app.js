@@ -312,15 +312,27 @@
     } catch (e) {}
   }
 
-  if (typeof window !== 'undefined') {
-    const unlockAudio = () => {
-      if (audioCtx && audioCtx.state === 'suspended') {
-        audioCtx.resume();
+  function unlockMobileAudio() {
+    if (typeof window === 'undefined') return;
+    try {
+      const ctx = getAudioCtx();
+      if (ctx) {
+        if (ctx.state === 'suspended') ctx.resume().catch(() => {});
+        const buffer = ctx.createBuffer(1, 1, 22050);
+        const source = ctx.createBufferSource();
+        source.buffer = buffer;
+        source.connect(ctx.destination);
+        source.start(0);
       }
-    };
-    ['click', 'touchstart', 'keydown', 'pointerdown'].forEach((evt) => {
-      window.addEventListener(evt, unlockAudio, { passive: true });
+      preloadKeyboardBuffer();
+    } catch (e) {}
+  }
+
+  if (typeof window !== 'undefined') {
+    ['click', 'touchstart', 'touchend', 'keydown', 'pointerdown'].forEach((evt) => {
+      window.addEventListener(evt, unlockMobileAudio, { passive: true });
     });
+    unlockMobileAudio();
   }
 
   trackVisit();
