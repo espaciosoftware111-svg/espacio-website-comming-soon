@@ -91,12 +91,12 @@ export const PublicComingSoon: React.FC<PublicComingSoonProps> = ({
             onMouseEnter={() => setIsLogoHovered(true)}
             onMouseLeave={() => setIsLogoHovered(false)}
           >
-            {/* Balanced Luminous Mist — Natural translucent daylight wash behind logo */}
+            {/* Luminous Mist — Tuned with +12% enhanced opacity behind logo */}
             <div
-              className="absolute -inset-x-5 sm:-inset-x-8 -inset-y-3 sm:-inset-y-4 pointer-events-none -z-10 filter blur-lg opacity-85"
+              className="absolute -inset-x-5 sm:-inset-x-8 -inset-y-3 sm:-inset-y-4 pointer-events-none -z-10 filter blur-lg opacity-[0.97]"
               style={{
                 background:
-                  'radial-gradient(ellipse at 45% 50%, rgba(255, 255, 255, 0.88) 0%, rgba(252, 250, 246, 0.62) 42%, rgba(247, 244, 238, 0.22) 72%, transparent 100%)',
+                  'radial-gradient(ellipse at 45% 50%, rgba(255, 255, 255, 0.98) 0%, rgba(252, 250, 246, 0.74) 42%, rgba(247, 244, 238, 0.34) 72%, transparent 100%)',
               }}
             />
 
