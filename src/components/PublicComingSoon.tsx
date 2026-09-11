@@ -82,45 +82,45 @@ export const PublicComingSoon: React.FC<PublicComingSoonProps> = ({
       </div>
 
       {/* Top Header Navigation */}
-      <header className="relative z-30 w-full bg-transparent pt-3 sm:pt-4 lg:pt-5 pb-1 shrink-0">
-        <div className="w-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-14 h-14 sm:h-16 lg:h-18 flex items-center justify-between">
+      <header className="relative z-30 w-full bg-transparent pt-2.5 sm:pt-4 lg:pt-5 pb-1 shrink-0">
+        <div className="w-full px-2.5 sm:px-6 md:px-8 lg:px-12 xl:px-14 h-12 sm:h-16 lg:h-18 flex items-center justify-between">
           
           {/* Left: Brand Monogram & Title with Localized Ethereal Mist */}
           <div
-            className="relative flex items-center gap-2.5 sm:gap-3.5 lg:gap-4 select-none px-2 sm:px-3 py-1.5 cursor-pointer group transition-all duration-300"
+            className="relative flex items-center gap-1.5 xs:gap-2 sm:gap-3.5 lg:gap-4 select-none px-1.5 sm:px-3 py-1 sm:py-1.5 cursor-pointer group transition-all duration-300 max-w-[44%] sm:max-w-none"
             onMouseEnter={() => setIsLogoHovered(true)}
             onMouseLeave={() => setIsLogoHovered(false)}
           >
-            {/* Luminous Mist — Tuned with +12% enhanced opacity behind logo */}
+            {/* Luminous Mist — Scoped strictly behind logo, ends well before center lamp */}
             <div
-              className="absolute -inset-x-5 sm:-inset-x-8 -inset-y-3 sm:-inset-y-4 pointer-events-none -z-10 filter blur-lg opacity-[0.97]"
+              className="absolute -inset-x-2 sm:-inset-x-8 -inset-y-1.5 sm:-inset-y-4 pointer-events-none -z-10 filter blur-md sm:blur-lg opacity-[0.97]"
               style={{
                 background:
                   'radial-gradient(ellipse at 45% 50%, rgba(255, 255, 255, 0.98) 0%, rgba(252, 250, 246, 0.74) 42%, rgba(247, 244, 238, 0.34) 72%, transparent 100%)',
               }}
             />
 
-            {/* Monogram Emblem (Larger on mobile, glows when hovered or when action buttons are hovered) */}
-            <div className={`w-11 h-11 xs:w-12 xs:h-12 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-13 lg:h-13 flex items-center justify-center transition-all duration-300 shrink-0 ${isLampLit ? 'scale-110 drop-shadow-[0_0_16px_rgba(223,194,141,0.7)]' : 'group-hover:scale-105'}`}>
+            {/* Monogram Emblem (Compact on mobile to maintain clean clearance from lamp) */}
+            <div className={`w-6 h-6 xs:w-7 xs:h-7 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-13 lg:h-13 flex items-center justify-center transition-all duration-300 shrink-0 ${isLampLit ? 'scale-110 drop-shadow-[0_0_16px_rgba(223,194,141,0.7)]' : 'group-hover:scale-105'}`}>
               <EspacioMonogram size="100%" className="w-full h-full" variant="dark" isLightOn={isLampLit} glow={isLampLit} tightFit={true} useImage={false} />
             </div>
 
-            {/* Typography Lockup - Bold & Prominent on mobile */}
-            <div className="inline-flex flex-col items-start justify-center pl-0.5 sm:pl-1">
+            {/* Typography Lockup - Proportionally scaled on mobile so the name never touches the lamp */}
+            <div className="inline-flex flex-col items-start justify-center pl-0.5 sm:pl-1 overflow-visible">
               {/* ESPACIO */}
-              <span className="font-['Montserrat',sans-serif] text-[16.5px] xs:text-[18px] sm:text-[16px] md:text-[19px] lg:text-[22px] font-semibold tracking-[0.30em] sm:tracking-[0.32em] text-[#121316] leading-none whitespace-nowrap drop-shadow-[0_1px_4px_rgba(255,255,255,0.95)]">
+              <span className="font-['Montserrat',sans-serif] text-[10.5px] xs:text-[12px] sm:text-[16px] md:text-[19px] lg:text-[22px] font-semibold tracking-[0.16em] xs:tracking-[0.20em] sm:tracking-[0.32em] text-[#121316] leading-none whitespace-nowrap drop-shadow-[0_1px_4px_rgba(255,255,255,0.95)]">
                 ESPACIO
               </span>
               
               {/* Thin Gold Line — Gold Diamond Dot — Thin Gold Line */}
-              <div className="flex items-center justify-between gap-1 sm:gap-1.5 my-1 sm:my-1.5 lg:my-2 w-full">
-                <span className="flex-1 h-[1.2px] bg-[#C59B27]" />
-                <span className="w-1.5 h-1.5 bg-[#C59B27] rotate-45 shrink-0" />
-                <span className="flex-1 h-[1.2px] bg-[#C59B27]" />
+              <div className="flex items-center justify-between gap-0.5 sm:gap-1.5 my-0.5 sm:my-1.5 lg:my-2 w-full">
+                <span className="flex-1 h-[1px] sm:h-[1.2px] bg-[#C59B27]" />
+                <span className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-[#C59B27] rotate-45 shrink-0" />
+                <span className="flex-1 h-[1px] sm:h-[1.2px] bg-[#C59B27]" />
               </div>
 
               {/* INTERIORS AND MODULAR */}
-              <span className="font-['Montserrat',sans-serif] text-[7px] xs:text-[7.5px] sm:text-[7px] md:text-[8px] lg:text-[9.5px] tracking-[0.34em] sm:tracking-[0.36em] font-semibold text-[#121316] uppercase leading-none whitespace-nowrap drop-shadow-[0_1px_4px_rgba(255,255,255,0.95)]">
+              <span className="font-['Montserrat',sans-serif] text-[4.8px] xs:text-[5.5px] sm:text-[7px] md:text-[8px] lg:text-[9.5px] tracking-[0.16em] xs:tracking-[0.22em] sm:tracking-[0.36em] font-semibold text-[#121316] uppercase leading-none whitespace-nowrap drop-shadow-[0_1px_4px_rgba(255,255,255,0.95)]">
                 INTERIORS AND MODULAR
               </span>
             </div>
