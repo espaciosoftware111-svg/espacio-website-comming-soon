@@ -91,12 +91,20 @@ export const PublicComingSoon: React.FC<PublicComingSoonProps> = ({
             onMouseEnter={() => setIsLogoHovered(true)}
             onMouseLeave={() => setIsLogoHovered(false)}
           >
-            {/* Soft Ambient Daylight Mist — Strictly behind the logo area only */}
+            {/* Brighter Luminous Mist Core — High contrast pure daylight behind logo */}
             <div
-              className="absolute -inset-x-5 sm:-inset-x-8 -inset-y-3 sm:-inset-y-4 pointer-events-none -z-10 filter blur-xl opacity-95"
+              className="absolute -inset-x-4 sm:-inset-x-6 -inset-y-2.5 sm:-inset-y-3.5 pointer-events-none -z-10 filter blur-md opacity-100"
               style={{
                 background:
-                  'radial-gradient(ellipse at 42% 50%, rgba(255, 255, 255, 0.98) 0%, rgba(252, 250, 246, 0.82) 42%, rgba(247, 244, 238, 0.32) 70%, transparent 100%)',
+                  'radial-gradient(ellipse at 45% 50%, rgba(255, 255, 255, 1.0) 0%, rgba(255, 255, 255, 0.94) 52%, rgba(253, 251, 247, 0.6) 76%, transparent 100%)',
+              }}
+            />
+            {/* Outer Feathered Soft Glow for natural seamless blending */}
+            <div
+              className="absolute -inset-x-7 sm:-inset-x-10 -inset-y-4 sm:-inset-y-6 pointer-events-none -z-10 filter blur-xl opacity-90"
+              style={{
+                background:
+                  'radial-gradient(ellipse at 45% 50%, rgba(255, 255, 255, 0.95) 0%, rgba(250, 248, 244, 0.68) 45%, rgba(247, 244, 238, 0.2) 75%, transparent 100%)',
               }}
             />
 
