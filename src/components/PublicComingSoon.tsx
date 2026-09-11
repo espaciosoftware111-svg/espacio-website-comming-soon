@@ -81,16 +81,34 @@ export const PublicComingSoon: React.FC<PublicComingSoonProps> = ({
         <PendantLight />
       </div>
 
-      {/* Top Header Navigation */}
-      <header className="relative z-30 w-full bg-transparent pt-3 sm:pt-4 lg:pt-5 pb-1 shrink-0">
+      {/* Top Header Navigation with Seamless Ceiling Sunlight Gradient */}
+      <header className="relative z-30 w-full bg-transparent pt-4 sm:pt-5 lg:pt-6 pb-2 shrink-0">
+        {/* Seamless Ceiling Daylight Wash (Cascades naturally from ceiling down across header) */}
+        <div
+          className="absolute top-0 left-0 right-0 h-28 sm:h-36 lg:h-40 pointer-events-none -z-10"
+          style={{
+            background:
+              'linear-gradient(180deg, rgba(255, 255, 255, 0.78) 0%, rgba(250, 247, 240, 0.48) 45%, rgba(247, 244, 238, 0.16) 75%, transparent 100%)',
+          }}
+        />
+        {/* Concentrated Soft Daylight Bloom directly behind top-left logo area */}
+        <div
+          className="absolute top-0 left-0 w-80 sm:w-96 lg:w-[480px] h-28 sm:h-36 lg:h-40 pointer-events-none -z-10 filter blur-2xl opacity-90"
+          style={{
+            background:
+              'radial-gradient(ellipse at 18% 35%, rgba(255, 255, 255, 0.98) 0%, rgba(250, 248, 244, 0.72) 45%, rgba(247, 244, 238, 0.25) 75%, transparent 100%)',
+          }}
+        />
+
         <div className="w-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-14 h-14 sm:h-16 lg:h-18 flex items-center justify-between">
           
-          {/* Left: Brand Monogram & Title - Hover to turn on logo lamp light */}
+          {/* Left: Brand Monogram & Title - Naturally illuminated by ceiling daylight */}
           <div
-            className="relative flex items-center gap-2.5 sm:gap-3.5 lg:gap-4 select-none px-1.5 sm:px-2 py-1 cursor-pointer group"
+            className="relative flex items-center gap-2.5 sm:gap-3.5 lg:gap-4 select-none px-1.5 sm:px-2 py-1 cursor-pointer group transition-all duration-300"
             onMouseEnter={() => setIsLogoHovered(true)}
             onMouseLeave={() => setIsLogoHovered(false)}
           >
+
             {/* Monogram Emblem (Larger on mobile, glows when hovered or when action buttons are hovered) */}
             <div className={`w-11 h-11 xs:w-12 xs:h-12 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-13 lg:h-13 flex items-center justify-center transition-all duration-300 shrink-0 ${isLampLit ? 'scale-110 drop-shadow-[0_0_16px_rgba(223,194,141,0.7)]' : 'group-hover:scale-105'}`}>
               <EspacioMonogram size="100%" className="w-full h-full" variant="dark" isLightOn={isLampLit} glow={isLampLit} tightFit={true} useImage={false} />
@@ -99,7 +117,7 @@ export const PublicComingSoon: React.FC<PublicComingSoonProps> = ({
             {/* Typography Lockup - Bold & Prominent on mobile */}
             <div className="inline-flex flex-col items-start justify-center pl-0.5 sm:pl-1">
               {/* ESPACIO */}
-              <span className="font-['Montserrat',sans-serif] text-[16.5px] xs:text-[18px] sm:text-[16px] md:text-[19px] lg:text-[22px] font-semibold tracking-[0.30em] sm:tracking-[0.32em] text-[#121316] leading-none whitespace-nowrap">
+              <span className="font-['Montserrat',sans-serif] text-[16.5px] xs:text-[18px] sm:text-[16px] md:text-[19px] lg:text-[22px] font-semibold tracking-[0.30em] sm:tracking-[0.32em] text-[#121316] leading-none whitespace-nowrap drop-shadow-[0_1px_4px_rgba(255,255,255,0.95)]">
                 ESPACIO
               </span>
               
@@ -111,7 +129,7 @@ export const PublicComingSoon: React.FC<PublicComingSoonProps> = ({
               </div>
 
               {/* INTERIORS AND MODULAR */}
-              <span className="font-['Montserrat',sans-serif] text-[7px] xs:text-[7.5px] sm:text-[7px] md:text-[8px] lg:text-[9.5px] tracking-[0.34em] sm:tracking-[0.36em] font-semibold text-[#121316] uppercase leading-none whitespace-nowrap">
+              <span className="font-['Montserrat',sans-serif] text-[7px] xs:text-[7.5px] sm:text-[7px] md:text-[8px] lg:text-[9.5px] tracking-[0.34em] sm:tracking-[0.36em] font-semibold text-[#121316] uppercase leading-none whitespace-nowrap drop-shadow-[0_1px_4px_rgba(255,255,255,0.95)]">
                 INTERIORS AND MODULAR
               </span>
             </div>

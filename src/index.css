@@ -85,4 +85,17 @@
   animation: lampSwing 2.6s ease-in-out infinite;
 }
 
+@keyframes cloudFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-4px) rotate(0.4deg);
+  }
+}
+
+.animate-cloud-float {
+  animation: cloudFloat 4.6s ease-in-out infinite;
+}
+
 

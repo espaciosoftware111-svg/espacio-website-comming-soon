@@ -486,9 +486,9 @@
           <!-- Clean Borderless Navigation -->
           <header class="relative z-30 w-full max-w-full bg-transparent overflow-hidden">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 lg:h-24 flex items-center justify-between">
-              
-              <!-- Left: Brand Monogram & Title - Exact Image 2 Lockup Structure -->
-              <div class="flex items-center gap-3 lg:gap-4 select-none">
+              <!-- Left: Brand Monogram & Title -->
+              <div class="relative flex items-center gap-3 lg:gap-4 select-none px-2 sm:px-3 py-1 cursor-pointer group transition-all duration-300">
+
                 <div id="nav-brand-logo" class="w-9 h-9 sm:w-11 sm:h-11 lg:w-16 lg:h-16 rounded-xl lg:rounded-2xl bg-[#121316] border border-[#C5A572]/40 flex items-center justify-center p-1 sm:p-1.5 lg:p-2.5 shadow-[0_4px_16px_rgba(0,0,0,0.25)] transition-all duration-300 hover:scale-105 shrink-0">
                   ${getExactLogoSVG('#FFFFFF', false, 0, 'nav-logo')}
                 </div>
@@ -497,9 +497,9 @@
                   
                   <!-- Thin Gold Line — Gold Square Dot — Thin Gold Line (Matching Image 2) -->
                   <div class="flex items-center gap-1.5 sm:gap-2 my-1 lg:my-1.5 w-full">
-                    <span class="flex-1 h-[1.5px] bg-[#C5A572] rounded-full"></span>
-                    <span class="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-[#C5A572] rotate-45 shrink-0"></span>
-                    <span class="flex-1 h-[1.5px] bg-[#C5A572] rounded-full"></span>
+                    <span class="flex-1 h-[1.5px] bg-[#C59B27] rounded-full"></span>
+                    <span class="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-[#C59B27] rotate-45 shrink-0"></span>
+                    <span class="flex-1 h-[1.5px] bg-[#C59B27] rounded-full"></span>
                   </div>
 
                   <span class="text-[7.5px] sm:text-[9px] md:text-[10px] lg:text-[12.5px] tracking-[0.28em] sm:tracking-[0.32em] font-bold text-[#121316] uppercase leading-none drop-shadow-[0_1px_4px_rgba(255,255,255,0.9)]">INTERIORS AND MODULAR</span>
